@@ -96,6 +96,7 @@ export function LevelSelect({ progress, onPlay, onContext, onBack }: LevelSelect
                 <span className="level-card__num">{l.number}</span>
                 <h2>{l.title}</h2>
               </div>
+              {l.year && !l.title.includes(l.year) && <span className="level-card__year">Episódio de {l.year}</span>}
               <p className="level-card__summary">{l.summary}</p>
               <div className="badges">
                 <LevelStatusBadge level={l} />
@@ -156,6 +157,11 @@ export function HowToPlay({ onBack }: { onBack: () => void }) {
             <td>Botão ✋</td>
           </tr>
           <tr>
+            <td>Abrir a fonte da notícia</td>
+            <td>F</td>
+            <td>Botão “Fonte”</td>
+          </tr>
+          <tr>
             <td>Pausar</td>
             <td>Esc ou P</td>
             <td>Botão ❚❚</td>
@@ -163,10 +169,16 @@ export function HowToPlay({ onBack }: { onBack: () => void }) {
         </tbody>
       </table>
       <ul className="tips">
+        <li>O HUD mostra a missão atual. Cada missão é uma interação com uma pessoa, objeto ou lugar do episódio.</li>
+        <li>
+          Ao interagir, aparece uma faixa com a fala do jogo (ficção), o resumo da notícia e a fonte. Aperte F ou toque em
+          “Fonte” para abrir o cartão completo; o jogo pausa enquanto ele está aberto.
+        </li>
+        <li>O botão 🗂 abre o arquivo da fase com tudo o que você já descobriu.</li>
         <li>Segure o pulo para ir mais alto; solte cedo para um pulo curto.</li>
         <li>Plataformas de andaime e lajes podem ser atravessadas por baixo.</li>
-        <li>Caiu no mar? Você volta ao último ponto de retorno (bandeira verde) com os documentos que já pegou.</li>
-        <li>Cada fase termina com o contexto do episódio e as fontes, separando encenação de fatos.</li>
+        <li>Caiu no mar? Você volta ao último ponto de retorno (bandeira verde) sem perder as missões cumpridas.</li>
+        <li>Cada fase termina com os desfechos do caso e o contexto completo, separando encenação de fatos.</li>
         <li>No celular, jogue com a tela na horizontal.</li>
       </ul>
     </Screen>

@@ -1,104 +1,101 @@
 import type { LevelDefinition } from "../types";
 
 /**
- * Fases 2–7: apenas planejadas. Nenhuma tem conteúdo factual ainda.
- *
- * As fases 4 e 6 estão `blocked`: o briefing não confirma os episódios, e
- * nada deve ser escrito sobre eles antes de uma pesquisa nova (ver
- * docs/editorial-review.md). Por isso o resumo público não descreve o tema.
+ * Fases 2–7: planejadas conforme o briefing v2 (seção 5). Ainda sem cena,
+ * eventos ou afirmações. Os cuidados de cada uma ficam em
+ * `fictionalizationNote` e em docs/editorial-review.md.
  */
+const base = (): Pick<LevelDefinition, "implementationStatus" | "editorialStatus" | "claims" | "narrativeEvents" | "outcomes"> => ({
+  implementationStatus: "planned",
+  editorialStatus: "pending",
+  claims: [],
+  narrativeEvents: [],
+  outcomes: [],
+});
+
 export const plannedLevels: LevelDefinition[] = [
   {
+    ...base(),
     id: "sitio",
     number: 2,
     title: "Sítio, que sítio?",
     summary:
-      "Explore um sítio estilizado e separe o que é registro, o que é alegação e o que é decisão judicial.",
+      "Uma propriedade rural em obra: siga as placas das empreiteiras, encontre o projeto da cozinha e confira o que aconteceu com a denúncia.",
     mechanic: "exploration",
-    implementationStatus: "planned",
-    editorialStatus: "pending",
-    objective: "Montar o quadro do episódio sem confundir propriedade, uso do imóvel, alegações e resultado processual.",
+    objective: "Procurar os responsáveis pela reforma, o projeto da cozinha, o documento de titularidade e o desfecho da denúncia.",
     intro: "Em desenvolvimento.",
     fictionalizationNote:
-      "Cenário, placas e diálogos serão encenação. A fase não pergunta se um objeto isolado \"prova culpa\" e não assume quem é o proprietário do imóvel.",
-    sourceIds: [],
-    claims: [],
+      "A propriedade será identificada como “Sítio de Atibaia”, não como imóvel registrado em nome de Lula. Itens de dinheiro, se houver, serão ícones da tese acusatória, sem entrega literal e sem somar valores de versões diferentes.",
+    sourceIds: ["S07", "S08", "S03"],
   },
   {
+    ...base(),
     id: "volta-por-brasilia",
     number: 3,
     title: "Operação: Volta por Brasília",
-    summary: "Puzzle logístico curto: leve cada caixa de processo ao destino certo, conforme a cronologia verificada.",
+    summary: "Puzzle logístico: leve cada processo à porta indicada e veja a rota ser recalculada pela decisão sobre competência.",
     mechanic: "logistics",
-    implementationStatus: "planned",
-    editorialStatus: "pending",
-    objective: "Entregar cada processo no juízo indicado pela cronologia verificada.",
+    objective: "Encontrar a placa de competência, levar o processo à porta indicada e abrir o carimbo de anulação.",
     intro: "Em desenvolvimento.",
     fictionalizationNote:
-      "Corredores, caixas e placas serão encenação. Cada processo terá seu próprio percurso; não haverá uma sequência única inventada para todos.",
-    sourceIds: ["stf-464566"],
-    claims: [],
+      "Esteiras, malas de processos e portas serão encenação. Cada processo terá a rota descrita na fonte; não haverá uma cadeia única de remessas nem acordo político inventado.",
+    sourceIds: ["S03", "S04"],
   },
   {
-    id: "quem-influencia-quem",
+    ...base(),
+    id: "ronaldinho-dos-negocios",
     number: 4,
-    title: "Quem Influencia Quem?",
-    summary: "Em pesquisa. Esta fase só será desenvolvida se houver fontes suficientes e verificadas.",
-    mechanic: "exploration",
-    implementationStatus: "planned",
-    editorialStatus: "blocked",
-    objective: "A definir após a pesquisa.",
-    intro: "Em pesquisa.",
+    title: "Ronaldinho dos Negócios",
+    year: "2005–2022",
+    summary:
+      "Gamecorp e Telemar/Oi: desloque pacotes de “Aporte”, “Parceria” e “Investigação” e encontre os desfechos das apurações.",
+    mechanic: "logistics",
+    objective: "Encontrar o aporte, abrir o contrato empresarial, atravessar a arena dos negócios e encontrar o desfecho das apurações.",
+    intro: "Em desenvolvimento.",
     fictionalizationNote:
-      "Se for desenvolvida, a mecânica não vai premiar a associação automática entre nomes e culpa. Parentesco, reunião ou vínculo empresarial não demonstram participação em ilícito.",
-    sourceIds: [],
-    claims: [],
+      "Aporte não é sinônimo de propina, e valores de empresas não são patrimônio pessoal comprovado. As apurações arquivadas em 2012 e em 2022 são distintas e não serão fundidas. Ser pai do empresário não indica participação em ilícito. Sem caricatura do jogador Ronaldinho ou ativos de clubes.",
+    sourceIds: ["S09", "S10"],
   },
   {
+    ...base(),
     id: "escolha-seu-ministro",
     number: 5,
     title: "Escolha seu Ministro",
-    summary:
-      "Atravesse a Praça dos Três Poderes seguindo o percurso real de uma indicação ao STF: indicação, Senado e posse.",
+    year: "2023–2024",
+    summary: "Do gabinete ao STF pela Praça dos Três Poderes: indicação, sabatina no Senado e posse.",
     mechanic: "logistics",
-    implementationStatus: "planned",
-    editorialStatus: "pending",
-    objective: "Cumprir as etapas institucionais de uma indicação ao STF, na ordem correta.",
+    objective: "Encontrar o crachá do ministro, atravessar a sabatina e chegar à cadeira do Supremo.",
     intro: "Em desenvolvimento.",
     fictionalizationNote:
-      "Figurinos, crachás e portas de gabinete serão encenação. A indicação não demonstra favorecimento em decisões, e a fase não vai inventar ordens do presidente ao STF.",
-    sourceIds: [],
-    claims: [],
+      "Nenhuma fala ficcional será atribuída ao ministro como citação real, e a fase não vai sugerir que ele obedece ao presidente. Alexandre de Moraes foi indicado por Michel Temer e não integra a mecânica.",
+    sourceIds: ["S11", "S12"],
   },
   {
-    id: "cade-o-debate",
+    ...base(),
+    id: "cade-o-debate-2006",
     number: 6,
-    title: "Cadê o Debate?",
-    summary: "Em pesquisa. Esta fase só será desenvolvida se o episódio for confirmado por fontes verificadas.",
-    mechanic: "agenda",
-    implementationStatus: "planned",
-    editorialStatus: "blocked",
-    objective: "A definir após a pesquisa.",
-    intro: "Em pesquisa.",
+    title: "Cadê o Debate? — 2006",
+    year: "2006",
+    summary: "Stealth cômico no palco do debate de 28/09/2006, com cadeira vazia e comício na mesma noite. O palco volta a acender em 27/10/2006.",
+    mechanic: "stealth",
+    objective: "Encontrar a cadeira reservada, escolher o caminho do comício e abrir o cartão do segundo turno.",
+    intro: "Em desenvolvimento.",
     fictionalizationNote:
-      "Se for desenvolvida, a encenação poderá exagerar desencontros de agenda, mas explicará que não reproduz uma conduta real e não atribuirá a um único participante o que não estiver demonstrado.",
-    sourceIds: ["tse-lei-9504", "tse-res-23610"],
-    claims: [],
+      "Esconder-se de jornalistas é invenção do roteiro, não conduta noticiada. A fase mostra que houve participação no debate do segundo turno de 2006 e não atribui motivação secreta.",
+    sourceIds: ["S13", "S14"],
   },
   {
+    ...base(),
     id: "o-retorno",
     number: 7,
     title: "O Retorno",
-    summary:
-      "Avance por portais de datas, na ordem certa: prisão, soltura, anulações, elegibilidade e eleição.",
+    year: "2018–2022",
+    summary: "Portais de datas: prisão em 2018, soltura em 2019, anulações em 2021 e eleição em 2022, na ordem certa.",
     mechanic: "timeline",
-    implementationStatus: "planned",
-    editorialStatus: "pending",
-    objective: "Atravessar a cronologia na ordem correta, entendendo o que cada decisão mudou.",
+    objective: "Abrir a porta de 2019, atravessar as decisões de 2021 e chegar ao resultado de 2022.",
     intro: "Em desenvolvimento.",
     fictionalizationNote:
-      "Os portais e o final \"Fim? … Continua…\" serão encenação. A soltura de 2019 e as anulações de 2021 são decisões diferentes, com fundamentos diferentes; a fase não vai tratar uma como consequência da outra.",
-    sourceIds: [],
-    claims: [],
+      "A soltura de 2019 e as anulações de 2021 são decisões diferentes; a porta de 2019 não depende do carimbo de 2021. O final mostra “Continua…”, sem inventar eventos de 2026.",
+    sourceIds: ["S16", "S03", "S17"],
   },
 ];

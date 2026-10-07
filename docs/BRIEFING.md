@@ -1,33 +1,37 @@
 # Lulaverso — briefing para desenvolvimento local
 
 > Documento de produto, conteúdo e implementação para Codex ou Claude Code.
-> Versão inicial: 7 de outubro de 2026.
+> Versão 2: 7 de outubro de 2026 — roteiro crítico dentro das fases.
+> Atualiza a Fase 1 já desenvolvida; preserva a implementação existente.
 > Nome provisório: **Lulaverso — A Jornada do Companheiro**.
 
-## 1. Prompt de início para o agente de programação
+## 1. Prompt para atualizar o projeto existente
 
-Leia este documento inteiro e implemente o projeto nesta pasta. Primeiro inspecione o repositório e as instruções locais; preserve o trabalho existente. Se a pasta estiver vazia, inicialize uma aplicação web local com TypeScript, React, Vite e Phaser. Use versões estáveis compatíveis, confirmando as APIs na documentação oficial. Não é necessário Next.js, servidor ou banco de dados para a primeira versão.
+A Fase 1 já foi desenvolvida. Leia este briefing e inspecione o repositório, as instruções locais e a implementação atual. Preserve a engine, os controles, a física e o que já funciona. Não reinicialize o projeto nem troque a stack sem necessidade.
 
-Construa um jogo 2D de plataforma com identidade própria, apresentado como sátira política sobre episódios públicos da trajetória de Lula. Comece pelo menu, controles, sistema de fases e uma Fase 1 completa. Entregue algo efetivamente jogável, com começo, objetivo, obstáculos, conclusão e painel de contexto factual. As outras fases devem aparecer no mapa com seu estado de implementação, sem fingir que já funcionam.
+Atualize principalmente a narrativa jogável: a crítica deve estar nos objetivos, NPCs, itens, cenários, animações e frases exibidas durante a fase. Um jogador que nunca abrir o painel “Contexto” deve entender que a fase satiriza a controvérsia do tríplex, as reformas da OAS e as acusações que foram noticiadas.
 
-Use sprites e efeitos provisórios originais feitos com formas geométricas ou pixel art simples. Não espere assets externos para começar. Separe o motor do jogo, os dados das fases e o conteúdo editorial. Implemente teclado e controles de toque, pausa, reinício, volume e progresso local. Documente os comandos de instalação, execução e build no README.
+Implemente a sequência e os textos da seção 6. Troque os papéis genéricos por objetos identificáveis; acrescente o empreiteiro, o projeto de reforma, o contrato cenográfico, o elevador privativo e a mala simbólica. Vincule cada interação aos IDs de fontes da seção 9. A mala é uma metáfora visual da vantagem alegada, não a reconstrução de uma entrega de dinheiro comprovada.
 
-Não invente reportagens, decisões, citações, eventos recentes ou acusações. As referências neste documento são pistas de pesquisa, não fontes verificadas. Conteúdos pendentes devem permanecer identificados como tal no protótipo local; não publique alegações sem conferir as fontes e o desfecho. Se estiver sem acesso à internet, avance na implementação com conteúdo provisório, registrando exatamente o que falta verificar.
+Não esconder a acusação apenas em uma página de fontes; também não esconder a defesa e o desfecho apenas nessa página. Use atribuições curtas no próprio momento da interação, como “Segundo o MPF” ou “Relato de Léo Pinheiro”. As frases cômicas originais devem aparecer como fala ficcional do jogo, sem aspas ou assinatura que as faça parecer citação real.
 
-Não faça deploy, não compre domínio e não configure campanha ou anúncios. O objetivo desta etapa é desenvolver e testar localmente. Prossiga nas decisões técnicas rotineiras sem pedir confirmação; pergunte apenas quando houver uma ambiguidade que impeça o trabalho.
+Priorize a Fase 1 já existente. Depois aplique o padrão às demais fases, com as mecânicas descritas na seção 5. Esta versão usa episódios históricos localizados em fontes: a Fase 4 passa a tratar de Gamecorp/Oi, e a Fase 6 usa o debate de 2006. Não importar as alegações não verificadas de 2026 da conversa anterior.
 
-Ao terminar, informe o que funciona, como executar, quais verificações realizou e quais pendências editoriais ou técnicas permanecem.
+Faça as mudanças locais, execute as verificações pertinentes e descreva o que foi alterado. Não faça deploy. Prossiga nas escolhas técnicas rotineiras sem pedir confirmação. Se um arquivo ou recurso essencial estiver ausente, avance no que puder e aponte o bloqueio específico.
+
 
 ## 2. Conceito e experiência
 
-Uma aventura curta de plataforma e minijogos, com humor político, caricaturas e referências a controvérsias públicas. A inspiração funcional é o formato de newsgame: episódios viram cenários e mecânicas, e cada fase termina com contexto e fontes.
+Uma aventura curta de plataforma e minijogos, com crítica política explícita, caricaturas e humor visual. As notícias entram no cenário: personagens, objetos e objetivos encenam os episódios, com atribuição curta no momento da interação. O contexto final aprofunda uma narrativa que o jogador já entendeu durante a ação.
+
+O objetivo desta revisão é retirar o caráter genérico da primeira fase. Não basta coletar papéis e ler a crítica depois: a crítica precisa ser jogável. As animações exageradas e as frases cômicas são ficcionais; os resumos das notícias mantêm sujeito, data e desfecho.
 
 O jogo deve divertir por si só: boa resposta aos controles, objetivos compreensíveis, animações expressivas e fases com mecânicas diferentes. Não transformar cada tela em um artigo ou interromper constantemente a ação.
 
 - Idioma: português do Brasil.
 - Público: público geral interessado em sátira e política, sem personalização por perfil eleitoral.
 - Duração desejada do jogo completo: aproximadamente 15–25 minutos.
-- Primeira entrega: uma fase de aproximadamente 2–4 minutos, além dos menus.
+- Prioridade atual: atualizar a Fase 1 existente; duração desejada de 3–5 minutos.
 - Plataformas: navegador de desktop e celular.
 - Tom: irônico, ácido e visualmente cômico, com distinção clara entre encenação e fatos.
 - Não incluir pedido de voto, recomendação eleitoral ou mensagens de campanha na primeira versão.
@@ -40,7 +44,7 @@ O nome pode mudar depois. Outras opções: “O Retorno do Barba”, “A Jornad
 - Personagem principal: caricatura de Lula com barba branca, camisa e animações expressivas; sem reprodução fotográfica ou voz clonada.
 - Paleta quente, com vermelho, bege, azul e verde usados conforme o cenário.
 - Tipografia de aparência retrô nos títulos; fonte legível nos textos e fontes.
-- HUD discreto: fase, objetivo, itens coletados e botão de pausa.
+- HUD: fase, missão atual, interações descobertas, fonte da interação e pausa. Evitar textos genéricos como “colete os documentos”.
 - Resolução lógica sugerida: 960 × 540, com escala responsiva e proporção preservada.
 - Usar câmera lateral e pixel art nítida quando apropriado.
 - Não copiar sprites, músicas, mapas, logotipos, interfaces ou personagens de Nintendo/Mario ou do site de referência.
@@ -52,7 +56,9 @@ O site https://www.superflavio.com/ é referência de formato, não uma fonte de
 
 ## 4. Estrutura da aplicação
 
-Fluxo: abertura → menu → seleção de fase → contexto curto → jogo → resultado → contexto factual/fontes → próxima fase.
+Fluxo: abertura → menu → seleção de fase → premissa curta → jogo com notícia, crítica e contexto em cena → resultado → contexto/fontes → próxima fase.
+
+Uma fase precisa funcionar para quem não abre a tela extra de fontes. NPCs e itens trazem os elementos do episódio; defesa e desfecho também aparecem na rota normal, em linguagem curta. O texto completo fica disponível para consulta.
 
 ### Menu principal
 
@@ -91,151 +97,328 @@ O painel editorial contém:
 
 Campos sem pertinência podem ser omitidos. Campos sem verificação não podem parecer fatos confirmados.
 
-## 5. As sete fases
+## 5. As sete fases — crítica integrada à jogabilidade
+
+A seção 6 contém o roteiro completo da primeira fase. Aqui estão os objetivos visuais e narrativos das demais. Os nomes são títulos de sátira; não representam uma conclusão sobre culpabilidade.
 
 ### Fase 1 — “Tríplex: Subindo na Vida”
 
-**Tema:** o processo do tríplex e seu percurso judicial.
+Um prédio à beira-mar, um empreiteiro da OAS, uma planta de reforma, um contrato cenográfico da Petrobras, um elevador privativo e uma mala simbólica. O jogador atravessa a controvérsia e encontra as diferentes versões durante a subida. O final muda o cenário com a anulação, a suspeição do juiz e o arquivamento.
 
-**Cenário:** prédio litorâneo estilizado, com três setores verticais. O jogador sobe por plataformas e elevadores, coleta documentos e chega à saída do último andar.
-
-**Mecânica principal:** plataforma com coleta de documentos e checkpoints. Os documentos representam peças de um processo, não dinheiro ou produto de crime. Obstáculos são portas, andaimes e elevadores; não pressupor uma ação criminosa do personagem.
-
-**Virada narrativa:** ao concluir a subida, surge uma sequência ilustrada do percurso judicial. O cenário recebe carimbos de “CONDENAÇÃO”, depois “ANULAÇÃO POR INCOMPETÊNCIA” e “SUSPEIÇÃO DO JUIZ”. Os carimbos modificam visualmente o mapa e abrem a saída para a próxima fase.
-
-**Humor:** “Elevador processual indisponível”; “Novo destino: juízo competente”. Os personagens podem reagir ao mapa que se reorganiza.
-
-**Contexto a verificar:** condenações anteriores, anulação das decisões por incompetência e reconhecimento da suspeição de Sergio Moro no caso. Incluir a defesa de Lula e atualizar eventual encerramento posterior antes de publicar.
-
-**Evitar:** “Lula roubou um apartamento”, apresentar condenação anulada como vigente ou sugerir que anulação/suspeição prova culpa ou inocência material.
+**Crítica encenada:** proximidade com empreiteiros e suspeitas sobre benefícios privados. **Fontes:** S01–S06, S15. Não fazer apenas uma coleta de “documentos processuais”.
 
 ### Fase 2 — “Sítio, que sítio?”
 
-**Tema:** a controvérsia sobre o sítio de Atibaia e o respectivo processo.
+**Cenário:** uma propriedade rural, obra na cozinha, caixas de equipamentos, portão e placas das empreiteiras. A propriedade é identificada como “Sítio de Atibaia”; não como imóvel registrado em nome de Lula.
 
-**Cenário:** sítio estilizado, cozinha em reforma, jardins, placas e um lago com pedalinho.
+**Objetivos no HUD:**
 
-**Mecânica:** exploração e classificação de informações. O jogador encontra documentos e separa “registro”, “alegação” e “decisão”. Não perguntar se um objeto isolado “prova culpa”.
+1. “Procure os responsáveis pela reforma.”
+2. “Encontre o projeto da cozinha.”
+3. “Siga as placas das empreiteiras.”
+4. “Abra o documento de titularidade.”
+5. “Confira o que aconteceu com a denúncia.”
 
-**Objetivo:** montar um quadro do episódio sem confundir propriedade registral, uso do imóvel, alegações sobre reformas e resultado processual.
+**Mecânica:** cada projeto encontrado transforma parte do cenário de obra em ambiente reformado. Uma trilha pontilhada “Versão da acusação” liga empreiteiras, reformas e contratos; uma placa de defesa contesta que esses elementos demonstrem benefício ilícito.
 
-**Humor:** placas com interrogações e diálogos sobre a dificuldade de encontrar o documento certo. O pedalinho pode ser elemento de cenário, condicionado à checagem do contexto.
+**Frases ficcionais:** “A cozinha ficou pronta. A controvérsia também.”; “Paisagismo de um lado, processo do outro.”
 
-**Contexto a verificar:** titularidade do imóvel, imputações, defesa, decisões de anulação e desdobramentos posteriores. Não assumir propriedade de Lula.
+**Atribuição em cena:** “O MPF denunciou supostas vantagens por meio de reformas. Lula contestou as acusações e a propriedade do imóvel.” **Fontes:** S07.
+
+**Fechamento obrigatório:** condenação posteriormente anulada; notícia de rejeição da denúncia reapresentada em Brasília, em 2021, por falta de justa causa demonstrada. Não resumir o desfecho como mera mudança de endereço. **Fontes:** S03, S08.
+
+**Itens de dinheiro:** se houver, são ícones da tese acusatória, com indicação visual. Não animar uma entrega literal a Lula nem somar valores de diferentes versões da acusação como se fossem um total confirmado.
 
 ### Fase 3 — “Operação: Volta por Brasília”
 
-**Tema:** competência judicial e percurso dos processos.
+**Cenário:** esteiras, malas de processos, portas de tribunais, placas de endereço e carimbos.
 
-**Cenário:** labirinto de corredores, tribunais estilizados e caixas identificadas com processos.
+**Objetivos:** “Encontre a placa de competência”; “Leve o processo à porta indicada”; “Abra o carimbo de anulação”.
 
-**Mecânica:** puzzle logístico. O jogador precisa levar cada caixa ao destino previsto pela cronologia verificada; portas e placas mudam conforme os atos processuais.
+**Mecânica:** puzzle logístico; uma porta de Curitiba deixa de aceitar determinada caixa depois da decisão sobre competência. O caminho é redesenhado e exige uma nova rota.
 
-**Humor:** “Local errado”, “Redistribuição em andamento” e “Viagem rápida desbloqueada”.
+**Frases ficcionais:** “Anos de processo. Agora confira o endereço.”; “A rota foi recalculada.”
 
-**Contexto a verificar:** quais processos foram afetados e para onde foram enviados em cada etapa. Não tratar todos como idênticos nem inventar uma sequência universal Curitiba → TRF-4 → STJ → STF → Brasília.
+**Crítica encenada:** o percurso institucional e as reviravoltas do caso. A sátira pode questionar o sistema, sem inventar um acordo político que produziu a decisão.
 
-**Observação de produto:** manter esta fase curta para não repetir a mecânica e o conteúdo das fases 1 e 2.
+**Atribuição:** “Em 2021, o STF manteve a anulação por incompetência da vara de Curitiba.” Mostrar também o reconhecimento de parcialidade no caso do tríplex. **Fontes:** S03, S04.
 
-### Fase 4 — “Quem Influencia Quem?” — conceito condicionado à pesquisa
+A rota de cada processo deve corresponder à fonte. Não apresentar como fato uma única cadeia de remessas para todos os casos.
 
-**Tema proposto:** controvérsia pública envolvendo Fábio Luís Lula da Silva, se houver fontes suficientes e atuais.
+### Fase 4 — “Ronaldinho dos Negócios”
 
-**Estado editorial inicial:** bloqueado. A conversa anterior mencionou uma investigação de 2026, mas este documento não confirma sua existência, objeto ou situação. Não preencher esses detalhes por memória nem converter a referência em acusação dentro do jogo.
+**Episódio usado nesta versão:** Gamecorp, negócios de Fábio Luís Lula da Silva e relações empresariais com Telemar/Oi. A fase não usa a alegada investigação de cannabis/INSS de 2026.
 
-**Mecânica possível:** puzzle de documentos em que o jogador diferencia vínculos documentados, suspeitas atribuídas a autoridades e relações não demonstradas.
+**Cenário:** estúdio de games/televisão, mesa de contratos, antenas de telefonia e uma pequena arena de futebol empresarial. Personagem jogável: caricatura de Fábio Luís, identificado pelo nome.
 
-**Limite narrativo:** parentesco, reunião ou vínculo empresarial não demonstram participação de Lula ou do filho em ilícito. A mecânica não pode premiar a associação automática entre nomes e culpa.
+**Objetivos:** “Encontre o aporte”; “Abra o contrato empresarial”; “Atravesse a arena dos negócios”; “Encontre o desfecho das apurações”.
 
-**Critério de ativação:** fontes verificadas, atribuição precisa das alegações, defesa e situação processual atual. Se não houver base suficiente, manter um espaço no mapa com “Em pesquisa” e propor outro episódio documentado; não fabricar conteúdo para completar sete fases.
+**Mecânica:** deslocar pacotes empresariais entre estações e abrir cartões de reportagem. Os pacotes se chamam “Aporte”, “Parceria” e “Investigação”; não “Dinheiro roubado”. Usar um contrato ilustrado sem assinatura fabricada.
+
+**Base noticiada:** a Folha reportou um aporte de R$ 5 milhões da Telemar em 2005 e relatou a expressão de Lula comparando o filho ao Ronaldinho dos negócios. A mesma matéria registra o arquivamento das apurações então examinadas e a conclusão do MPF sobre aquela transação. **Fonte:** S09.
+
+**Humor original:** “No futebol, o gol. Nos negócios, o aporte.”; “Arena empresarial desbloqueada.”
+
+**Desfechos na própria fase:** um portal com “2012 — apurações arquivadas” corresponde a S09; outro cartão, separado e datado, apresenta o arquivamento noticiado em 2022 do inquérito sobre supostos repasses da Oi. S10 descreve exclusão de provas e falta de elementos remanescentes. Não fundir as duas apurações.
+
+**Limites factuais:** aporte não é sinônimo de propina; os valores noticiados sobre empresas e períodos não são patrimônio pessoal comprovado de Lulinha. Não concluir que Lula participou de ilícito por ser pai do empresário. Não usar caricatura do jogador Ronaldinho ou ativos de clubes.
 
 ### Fase 5 — “Escolha seu Ministro”
 
-**Tema:** indicação de Flávio Dino ao STF e passagem entre cargos públicos.
+**Cenário:** gabinete presidencial, Senado e STF, ligados por uma travessia caricatural da Praça dos Três Poderes.
 
-**Cenário:** Praça dos Três Poderes estilizada, Ministério da Justiça, Senado e STF.
+**Objetivos:** “Encontre o crachá do ministro”; “Atravesse a sabatina”; “Chegue à cadeira do Supremo”.
 
-**Mecânica:** puzzle de percurso institucional: indicação presidencial, aprovação pelo Senado e posse. Representar os passos efetivos, sem transformar a escolha em poder unilateral de nomeação instantânea.
+**Mecânica:** o personagem Dino troca o crachá do Executivo pela toga ao completar indicação, aprovação e posse. O Senado é uma etapa real do percurso, não um obstáculo dispensável.
 
-**Humor:** troca de figurino, crachás e portas de gabinete; travessia literal da praça.
+**Crítica encenada:** trânsito de uma trajetória política para a Corte e debate sobre independência institucional.
 
-**Contexto a verificar:** cargos, datas e procedimento da indicação de Dino. Selecionar documentos oficiais para o painel.
+**Frase original:** “Mudou a roupa. A pergunta continua: como fica a independência?”
 
-**Limites:** a indicação não demonstra cumplicidade ou favorecimento em decisões. Não inventar ordens do presidente ao STF. Se Alexandre de Moraes aparecer, identificar corretamente que sua indicação ao STF foi feita por Michel Temer; não associar sua nomeação a Lula.
+**Cartão em cena:** “Indicado por Lula, então ministro da Justiça, Dino foi aprovado pelo Senado em 2023. Na sabatina, afirmou que sua atuação no STF não teria viés político.” **Fonte:** S11. Posse em fevereiro de 2024: S12.
 
-### Fase 6 — “Cadê o Debate?” — conceito condicionado à pesquisa
+Não atribuir uma fala ficcional diretamente ao ministro como citação real. Não implementar “Dino obedece a Lula” ou um botão que anule processos a mando do presidente. Moraes não foi indicado por Lula; essa nomeação não integra a mecânica.
 
-**Tema proposto:** controvérsia documentada sobre participação ou ausência em debate.
+### Fase 6 — “Cadê o Debate? — 2006”
 
-**Cenário:** palco, púlpitos, câmeras, microfones e corredores.
+**Episódio usado nesta versão:** ausência no debate da Globo de 28/09/2006. Exibir “2006” no título, no HUD e nos cartões, para não parecer notícia de 2026.
 
-**Mecânica possível:** desafio cômico de agenda, escolhendo caminhos entre entrevistas e debate. A encenação pode exagerar movimentos e desencontros, mas deve explicar que não reproduz uma conduta secreta real.
+**Cenário:** palco iluminado, cadeira vazia, corredor de bastidores e palanque de comício.
 
-**Estado editorial inicial:** bloqueado. A conversa anterior fez afirmações sobre debates de 2026 e decisões do TSE que não foram verificadas neste documento.
+**Objetivos:** “Encontre a cadeira reservada”; “Escolha o caminho do comício”; “Passe longe do holofote”; “Abra o cartão do segundo turno”.
 
-**Critério de ativação:** confirmar evento, data, participantes, justificativas públicas e eventual decisão judicial. Incluir contexto que evite atribuir a um único participante o cancelamento de um evento quando isso não estiver demonstrado.
+**Mecânica:** stealth cômico, com luzes de estúdio e microfones móveis. Não aparecer no palco nessa cena é a regra ficcional do minijogo; esconder-se fisicamente dos jornalistas é invenção do roteiro, não conduta noticiada.
+
+**Frases originais:** “Presença: pendente.”; “A cadeira compareceu.”; “Próxima parada: palanque.”
+
+**Base:** a Memória Globo registra a ausência no primeiro turno e a participação no debate do segundo turno de 2006. A Folha relatou o comício em São Bernardo na mesma noite. **Fontes:** S13, S14.
+
+**Fechamento:** o palco se ilumina de novo com a data 27/10/2006, quando Lula participou do debate com Alckmin. Não transmitir que nunca debateu, nem acrescentar uma motivação secreta como fato.
 
 ### Fase 7 — “O Retorno”
 
-**Tema:** prisão, soltura, anulações, recuperação da elegibilidade e eleição de 2022.
+**Cenário:** portais de datas, instalação prisional estilizada, mapa processual, urna e Planalto.
 
-**Cenário:** mapa cronológico que se transforma entre períodos.
+**Objetivos:** “Abra a porta de 2019”; “Atravesse as decisões de 2021”; “Chegue ao resultado de 2022”.
 
-**Mecânica:** aventura curta com portais de datas e cartões de contexto; o desafio é avançar pela cronologia correta.
+**Mecânica:** a habilidade do personagem muda por etapa: em 2019 abre-se a saída da prisão; em 2021 muda o estado das condenações e da elegibilidade; em 2022 abre-se a passagem ao Planalto.
 
-**Atenção à ordem histórica:** separar prisão em 2018, soltura em 2019, decisões de 2021 e eleição de 2022. Não apresentar a soltura de 2019 como consequência das anulações de 2021. Conferir fundamentos e datas em fontes oficiais.
+**Humor original:** “Fim de jogo? O roteiro tinha outra fase.”; “Retorno desbloqueado.”
 
-**Final satírico:** “Fim?” → pausa → “Continua…”. Uma porta com “2026” pode remeter ao presente sem afirmar candidatos de segundo turno, resultado ou fatos eleitorais não verificados.
+**Cronologia:** prisão em 2018; soltura em 2019 ligada à decisão sobre execução da pena; anulações em 2021; vitória eleitoral em 2022. **Fontes:** S16, S03, S17.
 
-**Contexto:** explicar o que cada decisão efetivamente mudou. Não substituir a cronologia por “foi absolvido” nem manter “condenado” como situação jurídica atual sem fundamento.
+Não fazer a porta de 2019 depender de um carimbo de 2021. O fechamento pode mostrar “Continua…”, sem inventar eventos ou resultados de 2026.
 
-## 6. Especificação jogável da Fase 1
 
-### Mapa inicial
+## 6. Fase 1 — roteiro pronto para implementação
 
-- Mundo de aproximadamente 2.880 × 1.080 unidades, com câmera acompanhando o personagem.
-- Setor A: entrada e tutorial, piso seguro e plataformas baixas.
-- Setor B: subida, andaimes, duas plataformas móveis e primeiro checkpoint.
-- Setor C: último andar, plataforma com tempo de abertura e segundo checkpoint.
-- Saída: porta que inicia a sequência narrativa e o resultado.
-- Seis documentos coletáveis, distribuídos por rotas acessíveis.
-- Exigir pelo menos quatro documentos para abrir a saída; indicar o requisito claramente no HUD.
-- Quedas reiniciam no checkpoint; conservar documentos coletados para reduzir repetição.
-- Não usar inimigos que representem pessoas reais como alvos de violência.
+### 6.1. Resultado desejado
 
-### Movimento e resposta
+O jogador deve reconhecer o episódio **durante a ação**. Os elementos são nomeados: OAS, empreiteiro, contratos da Petrobras, reformas, elevador privativo, acusação, defesa e desfecho. A crítica visual recai sobre a relação entre poder, empreiteiras e benefícios privados alegados.
 
-- Movimento lateral, gravidade, pulo com altura ajustável pelo tempo de pressionamento.
-- Tolerância curta para pular logo após sair da borda e para registrar o comando pouco antes de aterrissar.
-- Sem exigir precisão excessiva no tutorial.
-- Plataformas móveis precisam transportar o personagem sem atravessamento.
-- Pausa congela física, animação e cronômetro do jogo.
-- Reiniciar restaura o estado da fase de maneira previsível.
+Não substituir esse roteiro por seis papéis genéricos seguidos de um texto explicativo. Não transformar a fase em prova de conhecimentos jurídicos. A informação vem de interações breves, enquanto o jogo continua funcionando como plataforma.
 
-### Textos provisórios de interface
+### 6.2. Abertura
 
-| Situação | Texto |
-| --- | --- |
-| Entrada | “Suba pelos andares e reúna os documentos.” |
-| Tutorial de movimento | “A/D ou setas para mover.” |
-| Tutorial de pulo | “Espaço para pular. Segure um pouco para ir mais alto.” |
-| Primeiro documento | “Peça do processo encontrada.” |
-| Saída sem requisito | “Faltam documentos: encontre pelo menos 4 de 6.” |
-| Checkpoint | “Ponto de retorno atualizado.” |
-| Conclusão | “Percurso concluído. Agora confira o que aconteceu.” |
+**Título:** “TRÍPLEX: SUBINDO NA VIDA”
 
-Os textos factuais e a sequência judicial só passam a conteúdo revisado depois da pesquisa. No desenvolvimento, usar indicação visível “Contexto em revisão” junto dos rótulos provisórios.
+**Subtítulo:** “Guarujá — a controvérsia que virou processo”
 
-### Assets mínimos
+**Texto original de apresentação:** “Um prédio à beira-mar. Uma reforma sob medida. E uma pergunta que não cabe no elevador: quem ficou com a conta?”
 
-Personagem com idle, caminhada, pulo e queda; chão; plataforma; elevador; andaime; porta; documento; marcador de checkpoint; fundo de litoral; prédio; carimbos da sequência final. Gerar placeholders no código ou SVGs próprios, mantendo um caminho claro para substituir por sprites definitivos.
+**Linha factual atribuída:** “A acusação noticiada relacionava benefícios da OAS a contratos da Petrobras. Lula negou recebimento ilícito; as condenações foram anuladas.”
+
+**Rodapé curto:** “Sátira de acusações e decisões noticiadas. Interações têm fontes.”
+
+**Botões:** “Entrar no prédio” e “Como jogar”.
+
+Fontes da linha factual: S01, S03. O subtítulo, a pergunta e o texto de apresentação são redação do jogo.
+
+### 6.3. Mapa e direção de arte
+
+Reaproveitar o mapa e a câmera existentes; expandir só onde necessário. Se precisar de um novo layout, usar três andares e aproximadamente 3.200 × 1.080 unidades de mundo.
+
+| Zona | Visual | Interação que dá sentido à crítica |
+| --- | --- | --- |
+| Calçada | Litoral, fachada “Solaris — Guarujá”, tapumes e capacetes com “OAS” em texto simples | Encontrar o empreiteiro |
+| Escritório da obra | Mesa, contrato ilustrado, carimbo, telefone e quadro de empreendimentos | Abrir a ligação alegada com contratos |
+| Área de reforma | Planta baixa, cozinha em instalação, escada e trilhos de elevador | Montar o projeto para mudar o cenário |
+| Mezanino da acusação | Recorte ilustrado de notícia e mala com identificação de metáfora | Encontrar a mala simbólica |
+| Andar privativo | Elevador diferenciado, varanda e acabamento mais sofisticado | Usar a reforma como mecânica |
+| Balcão da defesa | Cartão de versão defensiva e representação de registro imobiliário | Abrir a contestação antes da saída |
+| Terraço final | Porta, mapa de datas e carimbos | Ver a sequência dos desfechos |
+
+Os objetos são ilustrações próprias. Não reproduzir fotos, páginas inteiras de jornais, logotipos ou assinaturas sem licença. O nome textual da empresa serve para identificar o episódio; a arte não deve sugerir patrocínio.
+
+### 6.4. Regra de apresentação das notícias
+
+Cada interação tem duas camadas:
+
+- **Fala do jogo:** curta, cômica e identificada como ficcional.
+- **Faixa de notícia:** resumo atribuível e fonte/data, mostrado junto ao objeto.
+
+Exemplo de composição: personagem fala uma piada; imediatamente abaixo aparece “Relato de Léo Pinheiro • UOL • 20/04/2017”. Ao ativar o ícone de fonte, o jogo pausa e abre o cartão com o resumo. No teclado, isso funciona por foco e tecla; no celular, por toque.
+
+Manter fonte e categoria visíveis no momento da descoberta. Não usar texto microscópico, aviso que some antes de poder ser lido ou cor que indique que uma acusação é fato confirmado. Categorias: “Notícia”, “Acusação”, “Defesa”, “Decisão” e “Metáfora”.
+
+Mostrar a faixa de contexto por pelo menos 5 segundos; o jogador pode fechá-la ou reabri-la. Não impedir o controle do personagem por textos longos. Pausar somente quando ele abrir um painel modal.
+
+### 6.5. Missão 1 — “Procure o empreiteiro da OAS”
+
+**Gatilho:** sair do tutorial e chegar ao tapume.
+
+**NPC:** “Empreiteiro”, personagem ficcional de capacete e prancheta. Não atribuir as falas inventadas a Léo Pinheiro.
+
+**Fala original:** “Por aqui, a conversa começa na planta e termina no processo.”
+
+**Resumo noticiado:** “Léo Pinheiro afirmou em depoimento que a unidade estava reservada à família de Lula. A defesa contestou a versão.” **Fonte:** S02.
+
+**Efeito no jogo:** o NPC abre a porta do escritório e marca o próximo objetivo.
+
+**HUD após interação:** “Encontre o contrato na mesa.”
+
+**Piada ambiental:** placa “Atendimento personalizado. Controvérsia também.”
+
+### 6.6. Missão 2 — “Encontre o contrato da Petrobras”
+
+**Objeto:** pasta sobre uma mesa com “Contratos Petrobras” na capa. Ao abrir, o documento interno deve trazer “Ilustração — não reproduz um contrato real”.
+
+**Resumo noticiado:** “O MPF alegou ligação entre vantagens da OAS e favorecimento em contratos da Petrobras.” **Fonte:** S01.
+
+**Fala original de narrador:** “A pasta é grande. A pergunta também.”
+
+**Animação:** uma linha pontilhada liga a pasta ao prédio. O rótulo “Tese da acusação” permanece junto à linha. A planta da reforma fica iluminada.
+
+**Efeito no jogo:** desbloqueia uma passagem ou plataforma já existente.
+
+Não desenhar a assinatura de Lula, uma cláusula de propina ou um contrato fictício como se tivesse sido apreendido. A pasta representa a relação alegada; não prova que ele assinou contratos da estatal.
+
+### 6.7. Missão 3 — “Ache a planta da reforma”
+
+**Objeto:** planta baixa cenográfica, dividida em três peças: cozinha, escada e elevador.
+
+**Mecânica:** encontrar as peças por uma rota curta de plataformas; encaixar no quadro do escritório ou ativá-las por interação. Não exigir cliques precisos em mobile.
+
+**Resumo noticiado:** “Executivos da OAS relataram obras e um elevador privativo; um deles disse que a empresa bancou a reforma. A defesa contestou o benefício atribuído a Lula.” **Fonte:** S15.
+
+**Fala original:** “A reforma sobe de padrão. O caso sobe de instância.”
+
+**Efeito visual:** cozinha e elevador aparecem montados, com animação rápida. Usar materiais, bancadas e portas concretas, não apenas um brilho no documento.
+
+**HUD seguinte:** “Encontre a mala de dinheiro.”
+
+Não mostrar um pagamento pessoal de Lula ou uma aceitação da reforma como fato. A transformação visual traduz o episódio noticiado, sem definir a titularidade ou a ilicitude.
+
+### 6.8. Missão 4 — “Encontre a mala de dinheiro”
+
+**Objeto:** mala cenográfica sobre um pedestal junto ao recorte de notícia. Notas estilizadas podem aparecer dentro.
+
+**Identificação obrigatória no próprio objeto:** “METÁFORA DA ACUSAÇÃO”.
+
+**Card de descoberta:** “A mala representa a vantagem indevida alegada. Não retrata uma entrega literal noticiada neste episódio.”
+
+**Fonte associada à tese sobre vantagem:** S01. Essa fonte não é evidência de uma mala real.
+
+**Fala original:** “Neste jogo, a acusação ganhou alça.”
+
+**Mecânica:** interagir com a mala revela o símbolo no “Arquivo da fase”, com a categoria “Metáfora”. Não acrescentar dinheiro ao patrimônio do personagem, não realizar animação de entrega por empreiteiro a Lula e não converter a mala em uma prova encontrada.
+
+**Pontuação:** +1 interação descoberta, sem “R$ recebidos”, “propina coletada” ou simulação de enriquecimento.
+
+**HUD seguinte:** “Use o elevador privativo.”
+
+A existência de dinheiro como linguagem visual é permitida pelo conceito satírico. A representação não pode fabricar um evento específico que as fontes não relatam. Se o layout não comportar a identificação clara, substituir a mala por um ícone de “Vantagem alegada”.
+
+### 6.9. Missão 5 — “Use o elevador privativo”
+
+**Objeto:** elevador de vidro ou acabamento destacado; porta com a palavra “Privativo”.
+
+**Mecânica:** desbloqueado pela planta da reforma. Transporta o jogador por um trecho vertical; deixa uma última rota curta de plataforma antes do terraço.
+
+**Fala original:** “Subir ficou fácil. Explicar a subida, nem tanto.”
+
+**Resumo noticiado:** “O elevador privativo aparece nos relatos sobre a reforma do tríplex.” **Fontes:** S02, S15.
+
+**Efeito:** checkpoint no desembarque.
+
+**HUD seguinte:** “Abra a versão da defesa.”
+
+Não usar “Luxo roubado” ou “Reforma paga com dinheiro roubado” como voz factual do narrador. A crítica já fica visível pelo acabamento, pela identificação da empresa e pela pergunta sobre a conta.
+
+### 6.10. Missão 6 — “Abra a versão da defesa”
+
+**Objeto:** cartão “Defesa de Lula” ao lado da representação de registro do imóvel.
+
+**Resumo:** “Lula negou ser proprietário do tríplex e receber vantagem ilícita. Sua defesa contestou o relato de Pinheiro e a prova de benefício pessoal.” **Fonte:** S02.
+
+**Fala original do narrador:** “Na escritura e no processo, a história tem versões diferentes.”
+
+**Efeito:** atualiza o arquivo e libera a porta final. Este encontro é parte da rota principal; não um segredo opcional distante.
+
+Não escrever “não tem escritura, então não pode existir corrupção”: a disputa era mais ampla que propriedade formal. Mostrar a posição defensiva como posição defensiva, sem decidir o mérito por um item do cenário.
+
+### 6.11. Final — a fase muda de regra
+
+A porta do terraço inicia uma sequência breve de cenários e datas. Ela é visível para todos que terminarem a fase, mesmo sem clicar em “Contexto”.
+
+| Etapa | Texto principal | Texto complementar | Fonte |
+| --- | --- | --- | --- |
+| 2017 | “HOUVE CONDENAÇÃO” | “A decisão seria posteriormente anulada.” | S01 |
+| 2021 | “CONDENAÇÕES ANULADAS” | “Incompetência da vara de Curitiba.” | S03 |
+| 2021 | “JUIZ CONSIDERADO PARCIAL” | “STF confirmou a suspeição de Sergio Moro no caso do tríplex.” | S04 |
+| 2022 | “CASO ARQUIVADO” | “Extinção da punibilidade por prescrição quanto às imputações do tríplex.” | S05, S06 |
+
+**Animação:** carimbos mudam a fachada do mapa; andaimes cedem lugar a portas com novos destinos. Não fazer documentos arderem ou desaparecerem como se os ministros tivessem destruído provas.
+
+**Piada final original:** “O prédio tinha três andares. A história ganhou outros capítulos.”
+
+**Importante:** não encerrar com “preso até 2021”. Se a fase exibir prisão e soltura, usar a cronologia da Fase 7 e S16. Para a primeira atualização, a sequência acima basta.
+
+**Botões:** “Rejogar”, “Ver notícias” e “Próxima fase”.
+
+### 6.12. Contexto final pronto, em blocos curtos
+
+- **Acusação noticiada:** a reforma e o apartamento foram apresentados pela acusação como benefícios relacionados à OAS. Fonte S01.
+- **Relatos noticiados:** Pinheiro e outros executivos deram versões sobre reserva e reformas; a defesa as contestou. Fontes S02, S15.
+- **Defesa:** negou titularidade e recebimento ilícito. Fonte S02.
+- **Decisões:** anulação, reconhecimento de parcialidade e arquivamento posterior. Fontes S03–S06.
+- **Encenação:** NPC genérico, contrato ilustrado, missões, mala e frases cômicas foram criados para o jogo. A mala não documenta uma entrega de dinheiro.
+
+Não reproduzir as reportagens inteiras. Exibir resumos próprios, links, datas e atribuição.
+
+### 6.13. Estado da fase
+
+Trocar a antiga regra “4 de 6 documentos” por seis interações principais. Itens exploratórios extras podem valer pontuação, mas não substituem o roteiro.
+
+Estados propostos:
+
+```text
+INTRO
+MEET_CONTRACTOR
+FIND_CONTRACT
+ASSEMBLE_RENOVATION
+DISCOVER_SYMBOLIC_BAG
+RIDE_PRIVATE_ELEVATOR
+OPEN_DEFENSE
+LEGAL_OUTCOME
+COMPLETE
+```
+
+A morte ou queda preserva interações concluídas e reinicia no checkpoint. Reiniciar a fase zera o roteiro. Não permitir concluir antes de abrir a defesa e de assistir à sequência final; permitir pular a animação apenas depois de todos os textos essenciais ficarem disponíveis na tela de resultado.
+
+### 6.14. Critérios visuais específicos
+
+O empreiteiro deve ser reconhecível como NPC; a planta deve parecer planta; a pasta deve ter identificação de contratos; a mala deve ter formato de mala; o elevador deve se mover. Não satisfazer isso com retângulos iguais que só mudam de título.
+
+Aceitar assets provisórios bem distintos, gerados por SVG ou formas próprias. Não requerer arte definitiva para implementar. Em uma captura comum da fase, deve ser possível enxergar ao menos uma referência ao episódio além do nome “Lula”.
+
 
 ## 7. Modelo de dados
 
 Definir fases por dados tipados, sem embutir todo o conteúdo em componentes ou cenas. Exemplo de estrutura; adaptar sem adicionar complexidade desnecessária:
 
 ```ts
-type EditorialStatus = "pending" | "verified";
+type EditorialStatus = "pending" | "reviewed";
 type ImplementationStatus = "planned" | "playable" | "complete";
 
 interface Source {
@@ -246,6 +429,7 @@ interface Source {
   publishedAt?: string;
   checkedAt?: string;
   status: EditorialStatus;
+  accessMode?: "full_page" | "search_content" | "document";
 }
 
 interface EditorialClaim {
@@ -254,6 +438,22 @@ interface EditorialClaim {
   category: "fact" | "allegation" | "defense" | "legal_outcome";
   sourceIds: string[];
   status: EditorialStatus;
+}
+
+interface NarrativeEvent {
+  id: string;
+  missionTitle: string;
+  trigger: "proximity" | "interact" | "collect" | "finish";
+  objectKind: "npc" | "contract" | "blueprint" | "symbolic_bag"
+    | "elevator" | "defense_card" | "outcome";
+  satireText: string;
+  sourcedSummary: string;
+  attributionLabel: string;
+  category: "news" | "allegation" | "defense" | "decision" | "metaphor";
+  sourceIds: string[];
+  fictionNote?: string;
+  required: boolean;
+  nextEventId?: string;
 }
 
 interface LevelDefinition {
@@ -267,12 +467,15 @@ interface LevelDefinition {
   fictionalizationNote: string;
   claims: EditorialClaim[];
   sources: Source[];
+  narrativeEvents: NarrativeEvent[];
 }
 ```
 
-Estado de implementação e estado editorial são independentes: uma fase jogável pode continuar pendente de checagem. Não inferir `verified` só porque existem URLs.
+Estado de implementação e estado editorial são independentes. `reviewed` significa que o resumo corresponde ao que a fonte publicou e preserva seu contexto; não significa que uma acusação foi provada. Usar o modo de acesso real informado no registro de fontes. Não inferir revisão apenas pela presença de uma URL.
 
-O conteúdo público deve ter um controle explícito: itens pendentes ficam acessíveis apenas em modo de desenvolvimento. A checagem de conteúdo deve detectar afirmações sem fontes verificadas, IDs inexistentes e fases sem contexto. Um build local não significa aprovação editorial para publicação.
+Para cada evento, ligar o item visível, a missão, o resumo e o painel de fonte pelos mesmos IDs. `satireText` nunca aparece como declaração real de uma pessoa. O ID da mala deve carregar `category: "metaphor"` e a nota de ficção. Bloqueios de missão dependem dos eventos, não de um contador genérico de documentos.
+
+A validação de conteúdo deve detectar IDs inexistentes, alegações sem atribuição, metáforas sem nota de ficção e fases sem desfecho. Novos itens pendentes aparecem apenas em modo de desenvolvimento. Um build local não equivale a revisão jurídica para publicação.
 
 ## 8. Organização sugerida
 
@@ -300,33 +503,200 @@ Usar React para menus, acessibilidade e painéis de texto; Phaser para o mundo j
 
 Persistir apenas preferências e progresso em `localStorage`, com versão do formato e recuperação em caso de dados inválidos. Não implementar cadastro, analytics, coleta de dados políticos ou ranking remoto nesta etapa.
 
-## 9. Pesquisa e revisão editorial
+## 9. Fontes localizadas e regra de uso
 
-Este documento transforma uma proposta em briefing. **Não é um parecer jurídico nem uma confirmação das notícias citadas na conversa anterior.** Não repetir como fato informações recentes só porque uma resposta anterior apresentou um link.
+Esta revisão consultou cobertura jornalística, registros institucionais e uma cópia pública da decisão do tríplex. O que foi conferido é **o conteúdo publicado e o desfecho relatado**, não a verdade material das acusações. Usar notícias dispensa fazer uma investigação jornalística própria de todo o episódio; não dispensa ler a matéria, atribuir a versão corretamente e evitar uma encenação que invente um fato.
 
-Para cada afirmação: localizar a fonte, ler o conteúdo completo, registrar o trecho que a sustenta em notas internas, conferir data e sujeito, distinguir alegação de conclusão e atualizar o desfecho. Preferir decisões e documentos oficiais para afirmações processuais. Reportagens podem documentar declarações, contexto e denúncias, com atribuição correta.
+Não presumir que “a responsabilidade é só do jornalista”. A autoria da nova apresentação importa. O STJ admite críticas severas, irônicas e impiedosas a figuras públicas em temas de interesse público; o mesmo entendimento exige diligência quanto à informação e reconhece responsabilidade por abuso. Referência editorial: S18.
 
-### Pistas de pesquisa fornecidas na conversa — não verificadas
+As fontes abaixo dão uma base concreta para a implementação. Novas falas ou alegações que ultrapassem seus conteúdos precisam de outra referência. Não usar uma manchete antiga para apresentar condenação anulada como vigente.
 
-- STF, notícia associada à anulação e ao caso do tríplex: https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=464261
-- STF, notícia associada a extensão de efeitos da suspeição: https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=468184&tip=UN
-- STF, notícia associada à competência e remessa dos processos: https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=464566&ori=1
-- Lei das Eleições, compilação do TSE: https://www.tse.jus.br/legislacao/codigo-eleitoral/lei-das-eleicoes/lei-das-eleicoes-lei-nb0-9.504-de-30-de-setembro-de-1997/
-- Resolução TSE 23.610, texto compilado: https://www.tse.jus.br/legislacao/compilada/res/2019/resolucao-no-23-610-de-18-de-dezembro-de-2019
+**Data desta consulta:** 07/10/2026. **Uso recomendado:** resumos próprios; não copiar artigos, fotografias ou identidade visual dos veículos.
 
-Não usar URLs alegadamente relacionadas a notícias de 2026 como evidência sem localizar a publicação real. Para fases 4 e 6, iniciar uma pesquisa nova. Se uma URL acima não existir, não sustentar a afirmação ou tiver conteúdo diferente, registrar a falha e buscar fonte adequada.
+### S01 — Panorama do caso do tríplex
 
-Antes de eventual publicação, revisar autoria/expediente, direitos sobre assets, regras eleitorais aplicáveis na data, rotulagem de conteúdo sintético e textos potencialmente ofensivos ou descontextualizados. Não tratar “é sátira” ou “foi noticiado” como garantia automática de licitude. Esta revisão é uma etapa futura; não bloqueia a criação do protótipo local.
+- Veículo: Agência Brasil.
+- Autoria: Paulo Victor Chagas.
+- Publicação: 24/01/2018.
+- Título: “Entenda o caso triplex em que Lula foi condenado”.
+- URL: https://agenciabrasil.ebc.com.br/politica/noticia/2018-01/entenda-o-caso-triplex-em-que-lula-foi-condenado
+- Conteúdo utilizado: tese acusatória, ligação alegada com contratos, defesa e condenação histórica.
+- Escopo: notícia da época; precisa ser acompanhada por S03–S06.
+- Não atribuir a esta reportagem uma entrega literal de mala.
+
+### S02 — Depoimento do empreiteiro e contestação
+
+- Veículo: UOL Notícias.
+- Autoria: Andressa Rovani, Bernardo Barbosa, Daniela Garcia e Gustavo Maia.
+- Publicação: 20/04/2017; atualização em 24/04/2017.
+- Título: “Tríplex do Guarujá era de Lula, diz Léo Pinheiro a Moro na Lava Jato”.
+- URL: https://noticias.uol.com.br/politica/ultimas-noticias/2017/04/20/tinha-orientacao-para-nao-colocar-a-venda-porque-era-da-familia-de-lula-diz-leo-pinheiro-sobre-triplex.amp.htm
+- Conteúdo utilizado: versões de Pinheiro sobre reserva e obras; negativa da defesa.
+- Escopo: relato atribuído ao depoente, não certificação de titularidade pelo jornal.
+
+### S03 — Anulação por incompetência
+
+- Veículo: Agência Brasil.
+- Autoria: André Richter.
+- Publicação: 15/04/2021.
+- Título: “STF mantém anulação das condenações de Lula”.
+- URL: https://agenciabrasil.ebc.com.br/justica/noticia/2021-04/stf-mantem-anulacao-das-condenacoes-de-lula
+- Conteúdo utilizado: decisão sobre competência, anulações e efeito sobre elegibilidade.
+- Acesso nesta consulta: conteúdo fornecido pela busca; a abertura direta apresentou erro. Não registrar que houve leitura do acórdão completo.
+
+### S04 — Suspeição de Moro no tríplex
+
+- Órgão: STF.
+- Publicação: 23/06/2021.
+- Título: “STF confirma suspeição de Sergio Moro na ação do triplex do Guarujá”.
+- URL: https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=468086&ori=1
+- Conteúdo utilizado: confirmação da suspeição e manutenção da anulação de atos no caso.
+- Acesso nesta consulta: conteúdo institucional fornecido pela busca; abertura direta com erro.
+
+### S05 — Arquivamento do tríplex
+
+- Veículo: Migalhas.
+- Autoria: Redação.
+- Publicação: 28/01/2022.
+- Título: “Juíza do DF arquiva processo contra Lula no caso do tríplex do Guarujá”.
+- URL: https://www.migalhas.com.br/quentes/358845/juiza-do-df-arquiva-processo-contra-lula-no-caso-do-triplex-do-guaruja
+- Conteúdo utilizado: encerramento por prescrição quanto às imputações relativas ao tríplex.
+- Conferência complementar: S06.
+
+### S06 — Decisão judicial do arquivamento, cópia pública
+
+- Órgão emissor: 12ª Vara Federal Criminal da Seção Judiciária do Distrito Federal.
+- Data da decisão: 27/01/2022.
+- Processo indicado na capa: 1070239-94.2021.4.01.3400.
+- Processo de referência: 1028899-73.2021.4.01.3400.
+- URL da cópia disponibilizada por Migalhas: https://www.migalhas.com.br/arquivos/2022/1/A1321D59CAC7E2_acao.pdf
+- Conteúdo utilizado: dispositivo de arquivamento por prescrição quanto ao tríplex.
+- Não confundir essa fundamentação com os capítulos relativos ao acervo presidencial, que têm tratamento distinto no documento.
+
+### S07 — Acusação do sítio e defesa
+
+- Origem: Agência Brasil, reproduzida pelo UOL.
+- Autoria: Ivan Richard Esposito.
+- Publicação: 22/05/2017.
+- Título: “Lava Jato: MPF apresenta nova denúncia contra Lula envolvendo o sítio de Atibaia”.
+- URL: https://noticias.uol.com.br/ultimas-noticias/agencia-brasil/2017/05/22/lava-jato-mpf-apresenta-nova-denuncia-contra-lula-envolvendo-o-sitio-de-atibaia.htm
+- Conteúdo utilizado: tese sobre reformas e resposta defensiva.
+- Os valores e relações da acusação não são fatos de corrupção confirmados pela referência.
+
+### S08 — Desfecho da denúncia reapresentada do sítio
+
+- Veículo: CNN Brasil.
+- Autoria: João de Mari.
+- Publicação: 22/08/2021.
+- Título: “Juíza de Brasília rejeita denúncia contra Lula no caso do sítio de Atibaia”.
+- URL: https://www.cnnbrasil.com.br/politica/juiza-de-brasilia-rejeita-denuncia-contra-lula-sobre-sitio-de-atibaia/
+- Conteúdo utilizado: rejeição, fundamentos noticiados e posição da defesa.
+- Não generalizar esse desfecho para todo caso envolvendo Lula.
+
+### S09 — Gamecorp, aporte e apurações anteriores
+
+- Veículo: Folha de S.Paulo.
+- Autoria: José Ernesto Credendio e Andreza Matais.
+- Publicação: 09/11/2012.
+- Título: “Investigação sobre negócios de filho de Lula é arquivada”.
+- URL: https://www1.folha.uol.com.br/fsp/poder/76983-investigacao-sobre-negocios-de-filho-de-lula-e-arquivada.shtml
+- Conteúdo utilizado: investimento noticiado, expressão sobre o talento empresarial do filho e arquivamento descrito na matéria.
+- Não confundir essa apuração com o inquérito encerrado em 2022.
+
+### S10 — Arquivamento posterior sobre Oi/Gamecorp
+
+- Veículo: Folha de S.Paulo.
+- Autoria: Mônica Bergamo.
+- Publicação: 17/01/2022.
+- Título: “Justiça arquiva caso que liga Lulinha a supostos repasses ilegais da Oi”.
+- URL: https://www1.folha.uol.com.br/amp/colunas/monicabergamo/2022/01/justica-arquiva-caso-que-liga-lulinha-a-supostos-repasses-ilegais-da-oi.shtml
+- Conteúdo utilizado: pedido do MPF, exclusão de provas e arquivamento.
+- Não exibir suspeitas dessa apuração como investigação atual ativa.
+
+### S11 — Dino: aprovação e debate sobre atuação política
+
+- Órgão/veículo: Agência Senado.
+- Autoria: Rodrigo Baptista.
+- Publicação: 13/12/2023.
+- Título: “Com 47 votos favoráveis, Senado aprova Dino para o STF”.
+- URL: https://www12.senado.leg.br/noticias/materias/2023/12/13/com-47-votos-favoraveis-senado-aprova-dino-para-o-stf
+- Conteúdo utilizado: trajetória, aprovação e declaração de Dino sobre atuação sem viés político.
+- Críticas registradas na sabatina são opiniões dos respectivos parlamentares, não conclusões judiciais.
+
+### S12 — Dino: posse
+
+- Órgão: STF.
+- Publicação: 22/02/2024.
+- URL: https://portal.stf.jus.br/noticias/verNoticiaDetalhe.asp?idConteudo=527684
+- Conteúdo utilizado: indicação por Lula e posse na vaga de Rosa Weber.
+- Acesso nesta consulta: conteúdo institucional recuperado na busca.
+
+### S13 — Debate de 2006
+
+- Origem: Memória Globo, registro da emissora que realizou os debates.
+- Título: “Eleições presidenciais — 2006”.
+- URL: https://memoriaglobo.globo.com/jornalismo/coberturas/eleicoes-presidenciais-2006/noticia/eleicoes-presidenciais-2006.ghtml
+- Conteúdo utilizado: ausência em setembro e participação em outubro.
+- Não trasladar o episódio para 2026.
+
+### S14 — Comício na noite do debate
+
+- Veículo: Folha de S.Paulo.
+- Publicação: 29/09/2006.
+- URL: https://www1.folha.uol.com.br/fsp/brasil/fc2909200606.htm
+- Conteúdo utilizado: presença em comício em São Bernardo na noite da ausência.
+- O stealth do jogo é invenção, não relato sobre comportamento nos bastidores.
+
+### S15 — Relatos dos executivos sobre a reforma
+
+- Veículo: Folha de S.Paulo.
+- Autoria: José Marques.
+- Publicação: 26/04/2017.
+- Título: “Executivos dizem que reformaram tríplex para Lula a pedido de Pinheiro”.
+- URL: https://www1.folha.uol.com.br/poder/2017/04/1878950-executivos-dizem-que-reformaram-triplex-para-lula-a-pedido-de-pinheiro.shtml
+- Conteúdo utilizado: relatos sobre projeto, elevador e custeio; contestação defensiva.
+- Acesso nesta consulta: conteúdo da reportagem recuperado na busca.
+
+### S16 — Soltura em 2019
+
+- Veículo: Agência Brasil.
+- Publicação: 08/11/2019.
+- Título: “Após decisão do STF, juiz manda soltar ex-presidente Lula”.
+- URL: https://agenciabrasil.ebc.com.br/justica/noticia/2019-11/apos-decisao-do-stf-juiz-manda-soltar-ex-presidente-lula
+- Conteúdo utilizado: fundamento e data da determinação de soltura.
+- Acesso nesta consulta: conteúdo fornecido pela busca; abertura direta com erro.
+
+### S17 — Resultado eleitoral de 2022
+
+- Órgão: TSE.
+- Publicação original: 31/10/2022.
+- Título: “100% das seções totalizadas: confira como ficou o quadro eleitoral após o 2º turno”.
+- URL: https://www.tse.jus.br/comunicacao/noticias/2022/Outubro/100-das-secoes-totalizadas-confira-como-ficou-o-quadro-eleitoral-apos-o-2o-turno/
+- Conteúdo utilizado: eleição de Lula em 2022.
+- Não usar essa fonte para o resultado de 2026.
+
+### S18 — Referência sobre informação e crítica
+
+- Órgão: STJ.
+- Referência: Informativo 696; REsp 1.729.550/SP, julgamento em 14/05/2021.
+- URL: https://processo.stj.jus.br/jurisprudencia/externo/informativo/?acao=pesquisar&aplicacao=informativo&livre=%40CNOT%3D%27018151%27
+- Utilidade: distingue liberdade de crítica, diligência na informação e abuso.
+- Não é uma validação jurídica deste jogo nem uma garantia de ausência de responsabilidade.
+
+### Atualizações futuras
+
+Novos episódios entram como dados separados, com datas e fontes próprias. Conferir retificações e desfechos ao atualizar o conteúdo para publicação. Não recuperar como fatos os links possivelmente incorretos ou as afirmações não verificadas de 2026 da conversa anterior.
+
 
 ## 10. Etapas de implementação
 
 ### Etapa A — Fundação
 
-Inspecionar a pasta, criar a aplicação quando necessário, configurar TypeScript e scripts, montar menu e cena de jogo, implementar input e personagem. Confirmar execução local antes de expandir.
+Inspecionar a aplicação existente, identificar cena da Fase 1, entidades, controles, HUD e painel de contexto. Confirmar como executar e preservar o funcionamento atual. Inicializar projeto apenas se realmente não houver implementação.
 
 ### Etapa B — Primeira fase completa
 
-Implementar o mapa da Fase 1, documentos, plataformas, checkpoints, saída, pausa, reinício e resultado. Acrescentar o painel de contexto e fontes com marcação de pendências.
+Substituir coleta genérica pelo roteiro da seção 6. Adicionar os objetos e NPCs, configurar as seis interações, conectar notícias aos eventos e implementar a sequência de desfechos. Reaproveitar física, plataformas, checkpoints, pausa e reinício.
 
 ### Etapa C — Experiência e robustez
 
@@ -334,17 +704,25 @@ Adicionar toque, preferências, progresso, responsividade, foco de teclado e com
 
 ### Etapa D — Conteúdo e expansão
 
-Pesquisar as fontes, completar contexto e defesa e revisar a primeira fase. Criar a segunda e a terceira usando os sistemas existentes. Desenvolver as demais conforme conteúdo verificado e disponibilidade de mecânicas. Manter as fases bloqueadas identificadas como “Em pesquisa”.
+Usar o registro da seção 9 para montar os cartões e resumos; não iniciar uma pesquisa do zero para textos já delimitados neste roteiro. Expandir fontes apenas quando o código ou a narrativa acrescentarem outra afirmação. Aplicar o sistema de eventos às demais fases. Não confundir episódio histórico com notícia atual.
 
 ### Etapa E — Polimento
 
 Substituir assets provisórios, conferir licenças, ajustar dificuldade, revisar todas as fontes e testar o percurso completo. Publicação fica fora do escopo inicial.
 
-## 11. Critérios de aceitação da primeira entrega
+## 11. Critérios de aceitação desta atualização
 
 - Instalação, `dev` e `build` documentados e funcionando.
 - Menu utilizável e acesso a “Como jogar”, configurações e contexto.
-- Uma fase jogável do começo ao resultado, sem depender de serviços externos.
+- Fase 1 preservada e atualizada do começo ao resultado, sem depender de serviços externos.
+- Empreiteiro, contrato, planta, mala e elevador distinguíveis no cenário.
+- HUD mostra as missões da seção 6, com progressão coerente.
+- Cada interação apresenta a crítica e o resumo atribuído dentro da fase.
+- Sem abrir o contexto extra, o jogador encontra acusação, defesa e desfecho.
+- A mala está identificada como metáfora junto do próprio objeto.
+- Não há uma simulação de entrega real de mala ou um contrato com assinatura fabricada.
+- A sequência final inclui o arquivamento de 2022; não para apenas na condenação de 2017.
+- As fases históricas exibem seu ano; a fase do debate não parece notícia de 2026.
 - Movimento e pulo responsivos, coleta, checkpoints e porta de conclusão funcionando.
 - Quedas, pausa e reinício sem perda incoerente de estado.
 - Controles de toque utilizáveis e teclado funcionando nos menus.
@@ -360,7 +738,7 @@ Substituir assets provisórios, conferir licenças, ajustar dificuldade, revisar
 
 Executar build e checagem de tipos. Fazer um teste funcional do ciclo menu → fase → queda/checkpoint → pausa → conclusão → contexto → reinício. Verificar toque e redimensionamento quando o ambiente permitir.
 
-Testes automatizados devem cobrir regras que podem falhar: requisito de documentos para a saída, restauração de checkpoint, persistência com dados inválidos e validação de referências editoriais. Não criar testes que apenas repitam constantes ou detalhes internos do código.
+Testes automatizados devem cobrir regras que podem falhar: ordem e requisito das interações para a saída, restauração dos eventos no checkpoint, persistência com dados inválidos e integridade das referências. Se houver ferramenta de navegador, percorrer as seis missões e capturar a crítica em cena e o final. Não criar testes que apenas repitam constantes ou detalhes internos do código.
 
 Se não puder testar um navegador ou celular, declarar a limitação. Não afirmar que um recurso foi testado quando apenas foi implementado.
 
@@ -370,4 +748,6 @@ Backend, login, pagamentos, multiplayer, ranking online, campanha, segmentação
 
 ## 14. Entrega esperada do agente
 
-Projeto local organizado, README com comandos, primeira fase completa, sistemas reaproveitáveis, inventário de assets e notas editoriais com pendências precisas. A resposta final deve apontar como rodar e resumir o que está jogável, o que foi verificado e o próximo incremento concreto.
+Projeto existente atualizado, README com comandos, Fase 1 com narrativa crítica integrada, eventos reaproveitáveis, inventário de assets e fontes vinculadas. A resposta final deve apontar como rodar e resumir o que mudou, o que foi verificado e o próximo incremento concreto.
+
+Prompt curto para quem já tem o jogo aberto no Codex/Claude Code: **“Leia a versão 2 do LULAVERSO_BRIEFING.md. Preserve a implementação existente e atualize a Fase 1 conforme a seção 6. A crítica deve aparecer nos NPCs, missões, objetos e animações, com fontes atribuídas no momento da interação.”**

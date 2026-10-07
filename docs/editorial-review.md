@@ -1,84 +1,80 @@
 # Revisão editorial — estado da checagem
 
-Última atualização: 2026-10-07.
+Última atualização: 2026-10-07 (briefing v2).
 
-**Nada foi verificado ainda.** Todas as fontes e afirmações do jogo estão com
-`status: "pending"`. O ambiente em que o protótipo foi criado não tinha acesso a
-`portal.stf.jus.br` nem a `tse.jus.br` (bloqueados pela política de rede), então nenhuma
-URL foi aberta ou lida.
+## Situação
 
-As afirmações da Fase 1 são **rascunhos** escritos para estruturar o painel, com base no
-que o briefing descreve. Elas aparecem só em `npm run dev`, marcadas como pendentes, e
-ficam fora do build de produção.
+- As fontes S01–S18 vêm do registro do briefing v2 (`docs/BRIEFING.md`, seção 9). O
+  briefing informa que foram consultadas em 07/10/2026, algumas só pelo conteúdo
+  recuperado em busca (`accessMode: "search_content"`).
+- **No repositório, todas continuam `pending`.** O ambiente em que o código foi escrito
+  não tinha acesso a esses sites (bloqueio da política de rede). Por isso, ninguém
+  conferiu aqui os resumos do jogo contra o texto das fontes.
+- Os textos das interações, desfechos e afirmações foram copiados do roteiro do briefing
+  (seções 6.5–6.12), sem acréscimos factuais.
 
-## Como marcar algo como verificado
+`reviewed` significa que o resumo corresponde ao que a fonte publicou e preserva o
+contexto. Não significa que uma acusação foi provada.
 
-1. Abra a fonte e leia o conteúdo completo.
-2. Registre em `notes` (em `src/content/sources/index.ts`) o trecho que sustenta a
-   afirmação, além do título e da data reais.
-3. Preencha `title`, `publishedAt` e `checkedAt` (AAAA-MM-DD) e mude `status` para
-   `"verified"`.
-4. Revise o texto da afirmação contra a fonte (sujeito, data, órgão, decisão) e só então
-   mude o `status` dela.
-5. Rode `npm run check:content`. A validação recusa afirmação `verified` apoiada em fonte
-   pendente, fonte `verified` sem `checkedAt` e alegação sem autoria.
+## O que aparece em cada versão
 
-## Fontes (pistas do briefing)
-
-| ID | URL | Situação | O que falta |
+| Versão | Falas do jogo (ficção) | Resumos de notícia, desfechos, linha factual | Fontes |
 | --- | --- | --- | --- |
-| `stf-464261` | portal.stf.jus.br … idConteudo=464261 | não acessada | Confirmar que existe, título, data e se trata da incompetência da 13ª Vara Federal de Curitiba no caso do tríplex. |
-| `stf-468184` | portal.stf.jus.br … idConteudo=468184 | não acessada | Título, data e a quais processos a suspeição foi estendida. |
-| `stf-464566` | portal.stf.jus.br … idConteudo=464566 | não acessada | Para onde cada processo foi remetido. Não generalizar para todos os casos. |
-| `tse-lei-9504` | tse.jus.br — Lei 9.504/1997 | não acessada | Usar na revisão de regras eleitorais antes de qualquer publicação. |
-| `tse-res-23610` | tse.jus.br — Res. 23.610/2019 | não acessada | Propaganda eleitoral e rotulagem de conteúdo sintético. |
+| `npm run dev` ou build com `VITE_SHOW_PENDING=true` | sim | sim, com selo **pendente** | sim, “não revisada” |
+| `npm run build` (público) | sim | “Notícia em revisão” / “Decisão em revisão” enquanto a fonte estiver pendente | só as revisadas |
 
-Se alguma URL não existir, não sustentar a afirmação ou tiver conteúdo diferente, registre
-a falha aqui e busque uma fonte adequada.
+A nota da mala (“A mala representa a vantagem indevida alegada…”) é redação do próprio
+jogo e aparece sempre.
 
-## Fase 1 — “Tríplex: Subindo na Vida”
+## Como marcar uma fonte como revisada
 
-Afirmações em `src/content/levels/triplex.ts`, todas pendentes:
+1. Abra a fonte e leia o texto. Confira sujeito, data, órgão e desfecho.
+2. Compare com cada resumo que cita a fonte (`src/content/levels/triplex.ts`: campos
+   `sourcedSummary`, `attributionLabel`, `outcomes` e `claims`).
+3. Em `src/content/sources/index.ts`, preencha `checkedAt` (AAAA-MM-DD) e `accessMode`,
+   ajuste `notes` com o que foi conferido e mude `status` para `"reviewed"`.
+4. Revise as afirmações do painel (`claims`) que dependem dela e mude o `status` delas.
+5. Rode `npm run check:content`. A validação recusa afirmação revisada apoiada em fonte
+   pendente e fonte revisada sem `checkedAt`.
 
-| ID | Categoria | Falta |
+## Fase 1 — fontes e onde aparecem
+
+| Fonte | Usada em | Observação do briefing |
 | --- | --- | --- |
-| `triplex-denuncia` | alegação | Localizar a denúncia do MPF ou uma notícia oficial; data, crimes imputados e redação. |
-| `triplex-defesa` | defesa | Manifestação pública da defesa, com data e na formulação dela. |
-| `triplex-condenacao-1a-instancia` | desfecho | Data da sentença, crimes e pena; fonte oficial. |
-| `triplex-trf4` | desfecho | Data, pena e decisões posteriores (inclusive STJ). |
-| `triplex-incompetencia` | desfecho | Relator, datas (monocrática e plenário) e juízo de destino. |
-| `triplex-suspeicao` | desfecho | Órgão julgador, datas e alcance da extensão de efeitos. |
-| `triplex-desfecho-atual` | desfecho | Situação atual após a remessa (arquivamento, prescrição ou outro encerramento), com data. Não afirmar absolvição. |
+| S01 — Agência Brasil, 24/01/2018 | contrato, mala (tese), 2017 “Houve condenação”, linha factual | Notícia da época; acompanhar de S03–S06. Não sustenta mala real. |
+| S02 — UOL, 20/04/2017 | empreiteiro, elevador, defesa | Relato atribuído a Pinheiro; não certifica titularidade. |
+| S03 — Agência Brasil, 15/04/2021 | 2021 “Condenações anuladas”, linha factual | Conteúdo por busca; acórdão não lido. |
+| S04 — STF, 23/06/2021 | 2021 “Juiz considerado parcial” | Conteúdo institucional por busca. |
+| S05 — Migalhas, 28/01/2022 | 2022 “Caso arquivado” | Conferir com S06. |
+| S06 — decisão da 12ª Vara Federal do DF, 27/01/2022 | 2022 “Caso arquivado” | Não confundir com os capítulos do acervo presidencial. |
+| S15 — Folha, 26/04/2017 | planta da reforma, elevador | Conteúdo por busca. |
 
-Cuidados do briefing: não dizer que Lula “roubou um apartamento”, não apresentar
-condenação anulada como vigente e não sugerir que anulação ou suspeição provam culpa ou
-inocência.
+### Encenação (não depende de fonte)
 
-Os carimbos da sequência final (“CONDENAÇÃO”, “ANULAÇÃO POR INCOMPETÊNCIA”, “SUSPEIÇÃO DO
-JUIZ”) vêm com o aviso “Contexto em revisão”. Confirme a ordem cronológica antes de
-remover o aviso.
+- O empreiteiro é um personagem genérico; as falas dele não são de Léo Pinheiro.
+- O contrato é uma ilustração (“não reproduz um contrato real”), sem assinatura.
+- A mala é “METÁFORA DA ACUSAÇÃO”, identificada no próprio objeto e no cartão. Não há
+  animação de entrega, soma de valores ou “propina coletada”.
+- Missões, frases cômicas, portas de “novos destinos” e a piada final são do jogo.
 
-## Fases 2, 3, 5 e 7
+## Fases 2–7
 
-Planejadas, sem afirmações. Os temas e cuidados de cada uma estão no briefing (seção 5) e
-nas notas de `src/content/levels/planned.ts`. Pontos de atenção:
+Planejadas conforme a seção 5 do briefing v2, com as fontes S07–S17 já ligadas a cada
+fase. Ainda não têm eventos nem afirmações. Pontos de atenção:
 
-- **Fase 2:** não assumir que Lula é o proprietário do sítio.
-- **Fase 3:** cada processo tem um percurso próprio; não inventar uma sequência única.
-- **Fase 5:** Alexandre de Moraes foi indicado ao STF por Michel Temer; não associar a
-  nomeação dele a Lula.
-- **Fase 7:** prisão (2018), soltura (2019), decisões de 2021 e eleição de 2022 são
-  eventos distintos. A soltura de 2019 não foi consequência das anulações de 2021.
-
-## Fases 4 e 6 — bloqueadas (“Em pesquisa”)
-
-O briefing não confirma os episódios. Nenhum conteúdo foi escrito sobre eles, e o resumo
-público não descreve o tema. É preciso fazer uma pesquisa nova antes de qualquer
-implementação. Se não houver base suficiente, propor outro episódio documentado em vez de
-completar as sete fases.
+- **Fase 2:** “Sítio de Atibaia”, não imóvel registrado em nome de Lula. Fechamento com a
+  rejeição de 2021 (S08), sem generalizar.
+- **Fase 3:** cada processo segue a rota da fonte; nada de acordo político inventado.
+- **Fase 4 (Gamecorp/Oi):** arquivamentos de 2012 (S09) e 2022 (S10) são distintos.
+  Aporte não é propina. Sem caricatura do jogador Ronaldinho. Não usa as alegações de
+  2026 da conversa anterior.
+- **Fase 5:** sem fala ficcional atribuída a Dino como citação; Moraes fora da mecânica.
+- **Fase 6 (2006):** exibir o ano; o stealth é invenção; houve debate no 2º turno.
+- **Fase 7:** soltura de 2019 não depende das anulações de 2021; final “Continua…”.
 
 ## Antes de qualquer publicação (etapa futura)
 
 Revisar autoria e expediente, direitos sobre os assets, regras eleitorais vigentes na data,
 rotulagem de conteúdo sintético e textos potencialmente ofensivos ou descontextualizados.
-“É sátira” ou “foi noticiado” não garantem licitude.
+S18 (STJ) é referência editorial: a liberdade de crítica não dispensa diligência e não é
+validação jurídica deste jogo.

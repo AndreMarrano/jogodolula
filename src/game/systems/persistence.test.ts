@@ -37,18 +37,19 @@ describe("progresso", () => {
     expect(loadProgress(s)).toEqual(p);
   });
 
-  it("guarda o melhor tempo e o maior número de documentos", () => {
+  it("guarda o melhor tempo e o maior número de interações", () => {
     let p = recordCompletion(emptyProgress(), "triplex", 90000, 6);
     p = recordCompletion(p, "triplex", 70000, 4);
     p = recordCompletion(p, "triplex", 80000, 5);
-    expect(p.levels.triplex).toEqual({ completed: true, bestTimeMs: 70000, bestDocs: 6 });
+    expect(p.levels.triplex).toEqual({ completed: true, bestTimeMs: 70000, bestInteractions: 6 });
   });
 
   it.each([
     ["JSON quebrado", "{nao é json"],
     ["versão desconhecida", JSON.stringify({ version: 99, data: { levels: {} } })],
+    ["formato antigo (v1, com documentos)", JSON.stringify({ version: 1, data: { levels: { triplex: { completed: true, bestTimeMs: 1, bestDocs: 4 } } } })],
     ["sem envelope", JSON.stringify({ levels: {} })],
-    ["levels não é objeto", JSON.stringify({ version: 1, data: { levels: [1, 2] } })],
+    ["levels não é objeto", JSON.stringify({ version: 2, data: { levels: [1, 2] } })],
     ["null", "null"],
   ])("volta ao vazio com dado inválido: %s", (_name, raw) => {
     const s = memoryStorage({ "lulaverso:progress": raw });
@@ -57,19 +58,19 @@ describe("progresso", () => {
 
   it("descarta só a fase corrompida e mantém as outras", () => {
     const raw = JSON.stringify({
-      version: 1,
+      version: 2,
       data: {
         levels: {
-          triplex: { completed: true, bestTimeMs: 80000, bestDocs: 5 },
+          triplex: { completed: true, bestTimeMs: 80000, bestInteractions: 5 },
           sitio: { completed: "sim" },
-          outra: { completed: true, bestTimeMs: -5, bestDocs: 2.5 },
+          outra: { completed: true, bestTimeMs: -5, bestInteractions: 2.5 },
         },
       },
     });
     const p = loadProgress(memoryStorage({ "lulaverso:progress": raw }));
-    expect(p.levels.triplex).toEqual({ completed: true, bestTimeMs: 80000, bestDocs: 5 });
+    expect(p.levels.triplex).toEqual({ completed: true, bestTimeMs: 80000, bestInteractions: 5 });
     expect(p.levels.sitio).toBeUndefined();
-    expect(p.levels.outra).toEqual({ completed: true, bestTimeMs: null, bestDocs: 0 });
+    expect(p.levels.outra).toEqual({ completed: true, bestTimeMs: null, bestInteractions: 0 });
   });
 
   it("não quebra quando o localStorage lança erro", () => {

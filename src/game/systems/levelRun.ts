@@ -40,74 +40,111 @@ export class CheckpointTracker {
   }
 }
 
-export interface LevelRunConfig {
-  start: Point;
-  documentIds: string[];
-  requiredDocs: number;
+export interface MissionDef {
+  id: string;
+  /** Peças que precisam ser reunidas antes de a missão poder terminar. */
+  parts?: string[];
 }
 
-export interface ExitStatus {
-  open: boolean;
-  missing: number;
+export interface LevelRunConfig {
+  start: Point;
+  /** Missões obrigatórias, na ordem do roteiro. */
+  missions: MissionDef[];
 }
 
 /**
- * Regras de uma partida, sem dependência do Phaser: documentos coletados,
- * checkpoints, quedas, cronômetro e requisito da saída.
+ * Regras de uma partida, sem dependência do Phaser: missões em ordem, peças,
+ * checkpoints, quedas e cronômetro. A saída só abre com todas as missões.
  */
 export class LevelRun {
   readonly checkpoints: CheckpointTracker;
-  private readonly collected = new Set<string>();
-  private readonly validDocs: Set<string>;
+  private readonly done = new Set<string>();
+  private readonly parts = new Map<string, Set<string>>();
   elapsedMs = 0;
   falls = 0;
 
   constructor(private readonly config: LevelRunConfig) {
     this.checkpoints = new CheckpointTracker(config.start);
-    this.validDocs = new Set(config.documentIds);
   }
 
-  get totalDocs(): number {
-    return this.validDocs.size;
+  get missionIds(): string[] {
+    return this.config.missions.map((m) => m.id);
   }
 
-  get requiredDocs(): number {
-    return this.config.requiredDocs;
+  get totalMissions(): number {
+    return this.config.missions.length;
   }
 
-  get docCount(): number {
-    return this.collected.size;
+  get completedCount(): number {
+    return this.done.size;
   }
 
-  hasDoc(id: string): boolean {
-    return this.collected.has(id);
+  /** Primeira missão ainda não concluída, ou `null` se acabaram. */
+  get currentMission(): string | null {
+    return this.config.missions.find((m) => !this.done.has(m.id))?.id ?? null;
   }
 
-  /** Retorna `true` só na primeira coleta de um documento válido. */
-  collect(id: string): boolean {
-    if (!this.validDocs.has(id) || this.collected.has(id)) return false;
-    this.collected.add(id);
+  get allDone(): boolean {
+    return this.currentMission === null;
+  }
+
+  isDone(id: string): boolean {
+    return this.done.has(id);
+  }
+
+  private def(id: string): MissionDef | undefined {
+    return this.config.missions.find((m) => m.id === id);
+  }
+
+  partTotal(missionId: string): number {
+    return this.def(missionId)?.parts?.length ?? 0;
+  }
+
+  partCount(missionId: string): number {
+    return this.parts.get(missionId)?.size ?? 0;
+  }
+
+  hasPart(missionId: string, partId: string): boolean {
+    return this.parts.get(missionId)?.has(partId) ?? false;
+  }
+
+  /** Registra uma peça da missão atual. Retorna `true` só na primeira vez. */
+  addPart(missionId: string, partId: string): boolean {
+    if (this.currentMission !== missionId) return false;
+    if (!this.def(missionId)?.parts?.includes(partId)) return false;
+    let set = this.parts.get(missionId);
+    if (!set) this.parts.set(missionId, (set = new Set()));
+    if (set.has(partId)) return false;
+    set.add(partId);
     return true;
   }
 
-  exitStatus(): ExitStatus {
-    const missing = Math.max(0, this.config.requiredDocs - this.collected.size);
-    return { open: missing === 0, missing };
+  /** A missão pode terminar agora? (é a atual e tem todas as peças) */
+  canComplete(missionId: string): boolean {
+    return this.currentMission === missionId && this.partCount(missionId) === this.partTotal(missionId);
+  }
+
+  /** Conclui a missão atual. Fora de ordem ou com peças faltando, não faz nada. */
+  complete(missionId: string): boolean {
+    if (!this.canComplete(missionId)) return false;
+    this.done.add(missionId);
+    return true;
   }
 
   tick(deltaMs: number): void {
     if (deltaMs > 0) this.elapsedMs += deltaMs;
   }
 
-  /** Queda: conta, mantém os documentos e devolve onde reaparecer. */
+  /** Queda: conta, mantém missões e peças e devolve onde reaparecer. */
   fall(): Point {
     this.falls++;
     return this.checkpoints.respawnPoint;
   }
 
-  /** Reinício completo da fase. */
+  /** Reinício completo da fase: zera o roteiro. */
   restart(): void {
-    this.collected.clear();
+    this.done.clear();
+    this.parts.clear();
     this.checkpoints.reset();
     this.elapsedMs = 0;
     this.falls = 0;

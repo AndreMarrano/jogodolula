@@ -13,7 +13,7 @@ export function LevelStatusBadge({ level }: { level: LevelDefinition }) {
 }
 
 export function EditorialBadge({ level }: { level: LevelDefinition }) {
-  if (level.editorialStatus === "verified") return <span className="badge badge--verified">Contexto verificado</span>;
+  if (level.editorialStatus === "reviewed") return <span className="badge badge--verified">Contexto revisado</span>;
   if (level.editorialStatus === "blocked") return null;
   return <span className="badge badge--pending">Contexto em revisão</span>;
 }

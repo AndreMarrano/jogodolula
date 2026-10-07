@@ -2,9 +2,12 @@ import type { SfxName } from "./systems/audio";
 import type { InputController } from "./systems/input";
 
 export interface HudState {
-  docs: number;
-  totalDocs: number;
-  requiredDocs: number;
+  /** Missão atual (ID do evento narrativo), ou `null` quando só falta sair. */
+  missionId: string | null;
+  completed: number;
+  total: number;
+  /** Peças reunidas, quando a missão atual tem peças. */
+  parts: { have: number; total: number } | null;
   exitOpen: boolean;
 }
 
@@ -13,14 +16,18 @@ export type ToastTone = "info" | "success" | "warn";
 export interface LevelResult {
   levelId: string;
   timeMs: number;
-  docs: number;
-  totalDocs: number;
+  interactions: number;
+  totalInteractions: number;
   falls: number;
 }
 
 export interface GameEvents {
   hud: HudState;
   toast: { text: string; tone: ToastTone };
+  /** Uma interação do roteiro foi descoberta (ou reaberta): mostrar a faixa de notícia. */
+  interaction: { eventId: string };
+  /** Começou a sequência final: a interface libera a tela para os carimbos. */
+  ending: Record<string, never>;
   complete: LevelResult;
 }
 

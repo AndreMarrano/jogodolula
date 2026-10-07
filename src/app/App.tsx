@@ -21,7 +21,7 @@ type View =
   | { name: "intro" }
   | { name: "menu" }
   | { name: "levels" }
-  | { name: "how" }
+  | { name: "how"; back?: View }
   | { name: "about" }
   | { name: "settings" }
   | { name: "context"; levelId?: string; back: View }
@@ -80,7 +80,7 @@ export function App() {
 
   const complete = (result: LevelResult) => {
     setProgress((p) => {
-      const next = recordCompletion(p, result.levelId, result.timeMs, result.docs);
+      const next = recordCompletion(p, result.levelId, result.timeMs, result.interactions);
       saveProgress(next);
       return next;
     });
@@ -118,7 +118,7 @@ export function App() {
       );
 
     case "how":
-      return <HowToPlay onBack={menu} />;
+      return <HowToPlay onBack={() => (view.back ? setView(view.back) : menu())} />;
 
     case "about":
       return <AboutScreen onBack={menu} />;
@@ -146,6 +146,7 @@ export function App() {
           level={level}
           touch={touch}
           onStart={() => play(level.id)}
+          onHow={() => setView({ name: "how", back: view })}
           onContext={() => setView({ name: "context", levelId: level.id, back: view })}
           onBack={() => setView({ name: "levels" })}
         />

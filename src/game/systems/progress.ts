@@ -3,7 +3,7 @@ import { isRecord, loadVersioned, removeKey, saveVersioned, type StorageLike } f
 export interface LevelProgress {
   completed: boolean;
   bestTimeMs: number | null;
-  bestDocs: number;
+  bestInteractions: number;
 }
 
 export interface Progress {
@@ -11,18 +11,19 @@ export interface Progress {
 }
 
 const KEY = "lulaverso:progress";
-const VERSION = 1;
+// v2: "documentos" da Fase 1 viraram "interações" do roteiro.
+const VERSION = 2;
 
 export const emptyProgress = (): Progress => ({ levels: {} });
 
 function parseLevel(value: unknown): LevelProgress | null {
   if (!isRecord(value)) return null;
-  const { completed, bestTimeMs, bestDocs } = value;
+  const { completed, bestTimeMs, bestInteractions } = value;
   if (typeof completed !== "boolean") return null;
   const time =
     typeof bestTimeMs === "number" && Number.isFinite(bestTimeMs) && bestTimeMs > 0 ? bestTimeMs : null;
-  const docs = typeof bestDocs === "number" && Number.isInteger(bestDocs) && bestDocs >= 0 ? bestDocs : 0;
-  return { completed, bestTimeMs: time, bestDocs: docs };
+  const found = typeof bestInteractions === "number" && Number.isInteger(bestInteractions) && bestInteractions >= 0 ? bestInteractions : 0;
+  return { completed, bestTimeMs: time, bestInteractions: found };
 }
 
 /** Entradas inválidas de uma fase são descartadas sem perder as outras. */
@@ -36,7 +37,7 @@ export function parseProgress(data: unknown): Progress | null {
   return { levels };
 }
 
-export function recordCompletion(progress: Progress, levelId: string, timeMs: number, docs: number): Progress {
+export function recordCompletion(progress: Progress, levelId: string, timeMs: number, interactions: number): Progress {
   const prev = progress.levels[levelId];
   return {
     levels: {
@@ -44,7 +45,7 @@ export function recordCompletion(progress: Progress, levelId: string, timeMs: nu
       [levelId]: {
         completed: true,
         bestTimeMs: prev?.bestTimeMs != null ? Math.min(prev.bestTimeMs, timeMs) : timeMs,
-        bestDocs: Math.max(prev?.bestDocs ?? 0, docs),
+        bestInteractions: Math.max(prev?.bestInteractions ?? 0, interactions),
       },
     },
   };

@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { NewsStrip, PhaseArchive, SourceCard } from "../../components/NewsCards";
 import { SettingsForm } from "../../components/SettingsForm";
 import { TouchControls } from "../../components/TouchControls";
 import type { LevelDefinition } from "../../content/types";
@@ -25,6 +26,8 @@ interface Toast {
 }
 
 const TOAST_MS = 2800;
+/** Tempo mínimo da faixa de notícia na tela (briefing: pelo menos 5 s). */
+const STRIP_MS = 10000;
 
 function usePortrait(): boolean {
   const query = "(orientation: portrait)";
@@ -38,6 +41,8 @@ function usePortrait(): boolean {
   return portrait;
 }
 
+type Modal = { kind: "card"; eventId: string } | { kind: "archive" } | null;
+
 export function GameScreen({ level, settings, touch, onSettingsChange, onComplete, onQuit }: Props) {
   const parentRef = useRef<HTMLDivElement>(null);
   const handleRef = useRef<GameHandle | null>(null);
@@ -45,15 +50,21 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
   const [hud, setHud] = useState<HudState | null>(null);
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [paused, setPaused] = useState(false);
+  const [strip, setStrip] = useState<{ eventId: string; key: number } | null>(null);
+  const [modal, setModal] = useState<Modal>(null);
+  const [discovered, setDiscovered] = useState<ReadonlySet<string>>(new Set());
   const portrait = usePortrait();
   // Alguns apps não deixam girar a tela: dá para jogar em pé mesmo assim.
   const [allowPortrait, setAllowPortrait] = useState(false);
   const blockedByOrientation = touch && portrait && !allowPortrait;
-  const effectivePaused = paused || blockedByOrientation;
+  // Só janelas modais (cartão de fonte, arquivo, pausa) param o jogo; a faixa não.
+  const effectivePaused = paused || blockedByOrientation || modal !== null;
 
-  // Valores lidos pela cena a cada quadro, sem recriar o jogo.
-  const live = useRef({ settings, touch, onComplete, paused: effectivePaused });
-  live.current = { settings, touch, onComplete, paused: effectivePaused };
+  const eventsById = useMemo(() => new Map(level.narrativeEvents.map((e) => [e.id, e])), [level]);
+
+  // Valores lidos pela cena e pelos atalhos, sem recriar o jogo.
+  const live = useRef({ settings, touch, onComplete, paused: effectivePaused, modal, strip });
+  live.current = { settings, touch, onComplete, paused: effectivePaused, modal, strip };
 
   const pushToast = useCallback((text: string, tone: ToastTone) => {
     const id = Math.random();
@@ -74,6 +85,14 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
         if (live.current.paused) handleRef.current?.pause();
       }),
       bridge.on("toast", (t) => pushToast(t.text, t.tone)),
+      bridge.on("interaction", ({ eventId }) => {
+        setDiscovered((d) => new Set(d).add(eventId));
+        setStrip({ eventId, key: Date.now() });
+      }),
+      bridge.on("ending", () => {
+        setStrip(null);
+        setToasts([]);
+      }),
       bridge.on("complete", (r) => live.current.onComplete(r)),
     ];
     const handle = createGame(parent, {
@@ -93,6 +112,13 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
     };
   }, [level.id, input, pushToast]);
 
+  // A faixa fica pelo menos STRIP_MS na tela (o jogador pode fechar antes).
+  useEffect(() => {
+    if (!strip) return;
+    const t = window.setTimeout(() => setStrip((cur) => (cur?.key === strip.key ? null : cur)), STRIP_MS);
+    return () => window.clearTimeout(t);
+  }, [strip]);
+
   useEffect(() => {
     input.clear();
     input.enabled = !effectivePaused;
@@ -106,9 +132,16 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.code === "Escape" || e.code === "KeyP") {
+      const { modal: openModal, strip: currentStrip, paused: isPaused } = live.current;
+      if (e.code === "Escape" && openModal) {
+        e.preventDefault();
+        setModal(null);
+      } else if ((e.code === "Escape" || e.code === "KeyP") && !openModal) {
         e.preventDefault();
         setPaused((p) => !p);
+      } else if (e.code === "KeyF" && currentStrip && !openModal && !isPaused) {
+        e.preventDefault();
+        setModal({ kind: "card", eventId: currentStrip.eventId });
       }
     };
     const onVisibility = () => {
@@ -125,9 +158,17 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
   const restart = () => {
     setHud(null);
     setToasts([]);
+    setStrip(null);
+    setModal(null);
+    setDiscovered(new Set());
     handleRef.current?.restart();
     setPaused(false);
   };
+
+  const mission = hud?.missionId ? eventsById.get(hud.missionId) : undefined;
+  const objective = hud ? (mission ? mission.hudObjective : "Saia pelo terraço.") : "";
+  const stripEvent = strip ? eventsById.get(strip.eventId) : undefined;
+  const cardEvent = modal?.kind === "card" ? eventsById.get(modal.eventId) : undefined;
 
   return (
     <div className="game-screen">
@@ -139,14 +180,22 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
             <strong>Fase {level.number}</strong> <span className="hud__title">{level.title}</span>
           </div>
           {hud && (
-            <div className={`hud__docs${hud.exitOpen ? " hud__docs--open" : ""}`} aria-live="polite">
-              <span aria-hidden="true">📄</span> {hud.docs}/{hud.totalDocs}
-              <span className="hud__req">
-                {hud.exitOpen ? " · saída liberada" : ` · mín. ${hud.requiredDocs} para sair`}
-              </span>
+            <div className={`hud__mission${hud.exitOpen ? " hud__mission--open" : ""}`} aria-live="polite">
+              <span className="hud__label">Missão:</span> {objective}
+              {hud.parts && ` (${hud.parts.have}/${hud.parts.total})`}
             </div>
           )}
           <div className="hud__buttons">
+            {hud && (
+              <button
+                type="button"
+                className="hud__btn hud__btn--wide"
+                aria-label={`Arquivo da fase: ${hud.completed} de ${hud.total} interações`}
+                onClick={() => setModal({ kind: "archive" })}
+              >
+                🗂 {hud.completed}/{hud.total}
+              </button>
+            )}
             <button
               type="button"
               className="hud__btn"
@@ -161,19 +210,44 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
           </div>
         </div>
 
-        <div className="toasts" role="status" aria-live="polite">
-          {toasts.map((t) => (
-            <div key={t.id} className={`toast toast--${t.tone}`}>
-              {t.text}
-            </div>
-          ))}
+        <div className="feed">
+          {stripEvent && !modal && (
+            <NewsStrip
+              key={strip!.key}
+              ev={stripEvent}
+              touch={touch}
+              onOpenSource={() => setModal({ kind: "card", eventId: stripEvent.id })}
+              onClose={() => setStrip(null)}
+            />
+          )}
+          <div className="toasts" role="status" aria-live="polite">
+            {toasts.map((t) => (
+              <div key={t.id} className={`toast toast--${t.tone}`}>
+                {t.text}
+              </div>
+            ))}
+          </div>
         </div>
 
-        {paused && !blockedByOrientation && (
+        {cardEvent && <SourceCard ev={cardEvent} onClose={() => setModal(null)} />}
+        {modal?.kind === "archive" && (
+          <PhaseArchive
+            events={level.narrativeEvents}
+            discovered={discovered}
+            onOpen={(eventId) => setModal({ kind: "card", eventId })}
+            onClose={() => setModal(null)}
+          />
+        )}
+
+        {paused && !modal && !blockedByOrientation && (
           <PauseMenu
             settings={settings}
             onSettingsChange={onSettingsChange}
             onResume={() => setPaused(false)}
+            onArchive={() => {
+              setPaused(false);
+              setModal({ kind: "archive" });
+            }}
             onRestart={restart}
             onQuit={onQuit}
           />
@@ -201,11 +275,12 @@ interface PauseProps {
   settings: Settings;
   onSettingsChange: (s: Settings) => void;
   onResume: () => void;
+  onArchive: () => void;
   onRestart: () => void;
   onQuit: () => void;
 }
 
-function PauseMenu({ settings, onSettingsChange, onResume, onRestart, onQuit }: PauseProps) {
+function PauseMenu({ settings, onSettingsChange, onResume, onArchive, onRestart, onQuit }: PauseProps) {
   const ref = useMenuNav<HTMLDivElement>();
   const [showSettings, setShowSettings] = useState(false);
   return (
@@ -215,6 +290,9 @@ function PauseMenu({ settings, onSettingsChange, onResume, onRestart, onQuit }: 
         <div className="menu">
           <button type="button" className="btn btn--primary" onClick={onResume}>
             Continuar
+          </button>
+          <button type="button" className="btn" onClick={onArchive}>
+            Arquivo da fase
           </button>
           <button type="button" className="btn" onClick={onRestart}>
             Reiniciar fase
