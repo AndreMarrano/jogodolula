@@ -1,0 +1,30 @@
+{
+  "name": "lulaverso",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Lulaverso — A Jornada do Companheiro: jogo 2D de sátira política (protótipo local)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "check:content": "vitest run src/content",
+    "check": "tsc --noEmit && vitest run"
+  },
+  "dependencies": {
+    "phaser": "^4.2.1",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.20.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.3",
+    "vitest": "^5.0.3"
+  }
+}

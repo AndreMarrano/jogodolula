@@ -34,5 +34,11 @@ esse trabalho foi commitado e enviado (push) ao GitHub**.
 
 ## Outras regras
 
-- Só crie ou altere código quando o usuário pedir. A ideia do jogo vem de um documento
-  `.md` enviado pelo usuário. Siga esse documento e pergunte o que não estiver claro.
+- Só crie ou altere código quando o usuário pedir. A ideia do jogo está em
+  `docs/BRIEFING.md`. Siga esse documento e pergunte o que não estiver claro.
+- Comandos, estrutura e o que já funciona: `README.md`.
+- Antes de commitar, rode `npm run check` (tipos e testes) e `npm run build`.
+- Conteúdo factual: nunca marque fonte ou afirmação como `verified` sem ler a fonte.
+  O estado da checagem e as pendências ficam em `docs/editorial-review.md`; atualize
+  esse arquivo junto com qualquer mudança em `src/content/`.
+- Assets novos: registre a origem e a licença em `docs/asset-licenses.md`.
