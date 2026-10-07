@@ -663,6 +663,7 @@ a {
   }
 }
 
+/* Deitado: botões por cima, nos cantos da tela. Em pé: abaixo do jogo. */
 .touch {
   position: absolute;
   left: 0;
@@ -671,9 +672,11 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: 0 2% 3%;
+  padding: 0 max(2%, env(safe-area-inset-right, 0px)) calc(3% + env(safe-area-inset-bottom, 0px))
+    max(2%, env(safe-area-inset-left, 0px));
   pointer-events: none;
 }
+
 
 .touch__group {
   display: flex;
@@ -705,6 +708,32 @@ a {
 
 .touch__btn--small {
   width: clamp(48px, 9vw, 68px);
+}
+
+@media (orientation: portrait) {
+  .game-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .touch {
+    position: static;
+    padding: 0 16px calc(16px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .touch__btn {
+    width: 72px;
+  }
+
+  .touch__btn--jump {
+    width: 88px;
+  }
+
+  .touch__btn--small {
+    width: 60px;
+  }
 }
 
 .overlay {
@@ -744,6 +773,14 @@ a {
 
 .rotate__icon {
   font-size: 3rem;
+}
+
+/* HUD em telas estreitas: só o essencial. */
+@media (max-width: 600px) {
+  .hud__title,
+  .hud__req {
+    display: none;
+  }
 }
 
 /* --------------------------------------------------------------- Telas baixas (celular deitado) */

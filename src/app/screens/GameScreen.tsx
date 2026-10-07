@@ -46,7 +46,9 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
   const [toasts, setToasts] = useState<Toast[]>([]);
   const [paused, setPaused] = useState(false);
   const portrait = usePortrait();
-  const blockedByOrientation = touch && portrait;
+  // Alguns apps não deixam girar a tela: dá para jogar em pé mesmo assim.
+  const [allowPortrait, setAllowPortrait] = useState(false);
+  const blockedByOrientation = touch && portrait && !allowPortrait;
   const effectivePaused = paused || blockedByOrientation;
 
   // Valores lidos pela cena a cada quadro, sem recriar o jogo.
@@ -167,8 +169,6 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
           ))}
         </div>
 
-        {touch && !effectivePaused && <TouchControls input={input} />}
-
         {paused && !blockedByOrientation && (
           <PauseMenu
             settings={settings}
@@ -180,12 +180,17 @@ export function GameScreen({ level, settings, touch, onSettingsChange, onComplet
         )}
       </div>
 
+      {touch && !effectivePaused && <TouchControls input={input} />}
+
       {blockedByOrientation && (
         <div className="rotate">
           <div className="rotate__icon" aria-hidden="true">
             ⟳
           </div>
           <p>Gire o celular para a horizontal para jogar.</p>
+          <button type="button" className="btn btn--ghost" onClick={() => setAllowPortrait(true)}>
+            Jogar mesmo assim
+          </button>
         </div>
       )}
     </div>

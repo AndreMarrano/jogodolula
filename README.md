@@ -69,7 +69,8 @@ Um build que passa **não** é aprovação editorial para publicação.
 | Interagir | E | ✋ |
 | Pausar | Esc ou P | ❚❚ |
 
-No celular, o jogo pede a tela na horizontal. Dá para segurar ◀/▶ e pular ao mesmo tempo.
+No celular, o jogo sugere a tela na horizontal, mas dá para jogar em pé (“Jogar mesmo assim”):
+os botões ficam abaixo da área do jogo. Dá para segurar ◀/▶ e pular ao mesmo tempo.
 
 ## Estrutura
 
@@ -121,7 +122,7 @@ criado e destruído junto com a tela de jogo (inclusive no StrictMode do desenvo
   - a fase inteira concluída **só com comandos de teclado**, sem teletransporte (6 de 6
     documentos);
   - celular deitado (863×360) com toque, incluindo mover e pular com dois dedos ao mesmo
-    tempo; aviso para girar a tela em retrato; menus sem rolagem horizontal em 360 px;
+    tempo; aviso para girar a tela em retrato e jogo em pé com os botões abaixo; menus sem rolagem horizontal em 360 px;
   - “reduzir movimento”, build de produção (pendências escondidas, sem gancho de testes).
 - **Não testado:** celular físico, Safari/iOS e áudio audível (o navegador de teste não
   tem saída de som). O WebGL rodou por software.
